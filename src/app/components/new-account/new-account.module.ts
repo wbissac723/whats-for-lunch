@@ -4,6 +4,7 @@ import { NewAccountComponent } from './new-account.component';
 
 @NgModule({
   declarations: [NewAccountComponent],
+  exports: [NewAccountComponent],
   imports: [
     CommonModule
   ]
