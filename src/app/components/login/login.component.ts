@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as fromStore from '../../core/store';
-import { Login } from './store/login.actions';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +9,9 @@ import { Login } from './store/login.actions';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private store: Store<fromStore.AppState>) { }
+  constructor(private store: Store<any>) {}
 
-  ngOnInit() {
-    this.store.select<any>('login').subscribe(state => {
-      console.log(state);
-    });
-  }
+  ngOnInit() {}
 
-  login(username: string, password: string) {
-    this.store.dispatch(new Login({ username, password }));
-  }
 
 }

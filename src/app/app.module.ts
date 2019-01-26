@@ -3,9 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
 import { LoginModule } from './components/login/login.module';
 import { NewAccountModule } from './components/new-account/new-account.module';
+
+import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
+
+import { InMemoryDbService, InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DatabaseService } from './database/database.service';
+
 
 @NgModule({
   declarations: [
@@ -14,8 +20,10 @@ import { NewAccountModule } from './components/new-account/new-account.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
+    InMemoryWebApiModule.forRoot(DatabaseService),
+    HttpClientModule,
     LoginModule,
+    StoreModule.forRoot({}),
     NewAccountModule,
   ],
   providers: [],
