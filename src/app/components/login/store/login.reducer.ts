@@ -16,14 +16,14 @@ export const initialState: LoginState = {
 export function reducer(state = initialState, action: LoginAction): LoginState {
 
     switch (action.type) {
-        case fromLogin.LOGIN_USER : {
+        case fromLogin.LOGIN : {
             return {
                 ...state,
                 loading: true
             };
         }
 
-        case fromLogin.LOGIN_USER_SUCCESS : {
+        case fromLogin.LOGIN_SUCCESS : {
             return {
                 ...state,
                 loading: false,
@@ -32,7 +32,7 @@ export function reducer(state = initialState, action: LoginAction): LoginState {
             };
         }
 
-        case fromLogin.LOGIN_USER_FAIL: {
+        case fromLogin.LOGIN_FAIL: {
             return {
                 ...state,
                 loading: false,

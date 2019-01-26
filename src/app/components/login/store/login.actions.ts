@@ -1,19 +1,21 @@
 import { Action } from '@ngrx/store';
 
-export const LOGIN_USER = 'Login User';
-export const LOGIN_USER_SUCCESS = 'Login User Success';
-export const LOGIN_USER_FAIL = 'Login User Fail';
+export const LOGIN = '[Login Page] Login User';
+export const LOGIN_SUCCESS = '[Login Page] Login Success';
+export const LOGIN_FAIL = '[Login Page] Login Fail';
 
-export class LoginUser implements Action {
-    readonly type = LOGIN_USER;
+export class Login implements Action {
+    readonly type = LOGIN;
+
+    constructor(public payload: { username: string; password: string }) {}
 }
 
 export class LoginUserSuccess implements Action {
-    readonly type = LOGIN_USER_SUCCESS;
+    readonly type = LOGIN_SUCCESS;
 }
 
 export class LoginUserFail implements Action {
-    readonly type = LOGIN_USER_FAIL;
+    readonly type = LOGIN_FAIL;
 }
 
-export type LoginAction = LoginUser | LoginUserSuccess | LoginUserFail;
+export type LoginAction = Login | LoginUserSuccess | LoginUserFail;
