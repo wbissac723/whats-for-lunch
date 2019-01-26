@@ -23,8 +23,8 @@ import { DatabaseService } from './database/database.service';
     InMemoryWebApiModule.forRoot(DatabaseService),
     HttpClientModule,
     LoginModule,
-    StoreModule.forRoot({}),
     NewAccountModule,
+    StoreModule.forRoot({}),
   ],
   providers: [],
   bootstrap: [AppComponent]

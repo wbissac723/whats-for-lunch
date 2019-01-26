@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 
@@ -14,6 +14,7 @@ import { LoginComponent } from './login.component';
   exports: [LoginComponent],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     StoreModule.forFeature('login', reducer)
   ]
