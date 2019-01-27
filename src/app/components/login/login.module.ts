@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 
-import { reducer } from './store/login.reducer';
+import { loginReducer } from './store/login.reducer';
 
 import { LoginComponent } from './login.component';
 
@@ -16,7 +16,7 @@ import { LoginComponent } from './login.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('login', reducer)
+    StoreModule.forFeature('login', loginReducer)
   ]
 })
 export class LoginModule { }

@@ -6,10 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './components/login/login.module';
 import { NewAccountModule } from './components/new-account/new-account.module';
 
-import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 
-import { InMemoryDbService, InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// Ngrx
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store';
+
+// In memory database
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DatabaseService } from './database/database.service';
 
 
@@ -24,7 +28,7 @@ import { DatabaseService } from './database/database.service';
     HttpClientModule,
     LoginModule,
     NewAccountModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers),
   ],
   providers: [],
   bootstrap: [AppComponent]
