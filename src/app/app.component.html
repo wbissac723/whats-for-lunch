@@ -1,17 +1,19 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <section class="container">
-  
-  <div>
-  
-    <app-login></app-login>
 
-    <br>
-    <br>
-    
-    <app-new-account></app-new-account>
-  
-  </div>
+  <p>logged status {{ loggedIn }}</p>
+
+  <span *ngIf="!loggedIn">
+    <a routerLink="/create_account">Create Account </a>
+  </span>
+
+  <span *ngIf="!loggedIn">
+    <a routerLink="/login"> Login</a>
+  </span>
+
+
+
+
+  <router-outlet></router-outlet>
 
 </section>
-
-<router-outlet></router-outlet>
