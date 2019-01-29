@@ -7,7 +7,8 @@ import { LoginActions, LoginAction } from '../store/login.actions';
 export const initialState: LoginState = {
     loginSuccess: false,
     loggedIn: false,
-    loading: false
+    loading: false,
+    loggedInUser: ''
 };
 
 export function loginReducer(state = initialState, action: LoginAction): LoginState {
@@ -18,7 +19,7 @@ export function loginReducer(state = initialState, action: LoginAction): LoginSt
             console.log('Logging into account.');
             return {
                 ...state,
-                loading: true
+                loading: true,
             };
         }
 

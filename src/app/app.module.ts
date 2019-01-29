@@ -17,6 +17,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DatabaseService } from './database/database.service';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginEffects } from './components/login/store/login.effects';
+import { UserAccountModule } from './components/user-account/user-account.module';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { LoginEffects } from './components/login/store/login.effects';
     NewAccountModule,
     EffectsModule.forRoot([LoginEffects]),
     StoreModule.forRoot(reducers),
+    UserAccountModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
