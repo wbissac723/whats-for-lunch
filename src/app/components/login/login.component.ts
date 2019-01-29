@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { LoginState } from './store';
 import { Login } from './store/login.actions';
 import { isLoading } from './store/login.selector';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -14,19 +15,48 @@ import { isLoading } from './store/login.selector';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  isLoading: boolean;
+  public isLoading: boolean;
+  public loginForm: FormGroup;
 
-  constructor(private store: Store<LoginState>) { }
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<LoginState>
+  ) { }
 
   ngOnInit() {
-    this.store.select(isLoading)
-      .subscribe((status: boolean) =>  this.isLoading = status);
+    this.store.select(isLoading).subscribe((status: boolean) =>  this.isLoading = status);
+
+    this.createLoginForm();
+
+    this.onFormChanges();
   }
 
-  login() {
-    this.store.dispatch(new Login({username: 'asdd', password: 'afafds'}));
-
+  createLoginForm() {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
+  onFormChanges() {
+    this.loginForm.valueChanges.subscribe(values => {
+
+      // TODO create validators for each control and track them
+
+    });
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  onSubmit(username: string, password: string) {
+    this.store.dispatch(new Login({ username, password }));
+  }
 
 }

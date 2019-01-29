@@ -1,26 +1,50 @@
 
+<!-- Shows spinner while loading -->
+<section *ngIf="isLoading">
+    ...Loading account details
+</section>
 
 
   <section *ngIf="!isLoading" class="justify-content-center">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
       <div class="form-group">
-        <input type="text" class="form-control input-text-box" id="username" placeholder="Enter user name">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control input-text-box" id="loginPassword" placeholder="Enter password">
+
+        <input type="text"
+          class="form-control input-text-box"
+          id="username"
+          placeholder="Enter user name"
+          formControlName="username">
+
+          <small *ngIf="username.touched && username.invalid" class="text-danger">Username is required.</small>
+
+
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-submit"(click)="login()">Submit</button>
+
+        <input type="password"
+          class="form-control input-text-box"
+          id="password"
+          placeholder="Enter password"
+          formControlName="password">
+
+          <small *ngIf="password.touched && password.invalid" class="text-danger">Password is required.</small>
+
+        </div>
+
+      <div class="form-group">
+        <button type="submit"
+        class="btn btn-primary btn-submit"
+        (click)="onSubmit(username.value, password.value)"
+        [disabled]="!loginForm.valid">Submit</button>
       </div>
 
     </form>
   </section>
 
-  <section *ngIf="isLoading">
-    ...Loading account details
-  </section>
+
+
 
 
 
