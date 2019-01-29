@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { LoginState } from './store';
 import { Login } from './store/login.actions';
 import { isLoading } from './store/login.selector';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -14,10 +13,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   public isLoading: boolean;
   public loginForm: FormGroup;
 
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -28,8 +35,7 @@ export class LoginComponent implements OnInit {
     this.store.select(isLoading).subscribe((status: boolean) =>  this.isLoading = status);
 
     this.createLoginForm();
-
-    this.onFormChanges();
+    this.handleFormChanges();
   }
 
   createLoginForm() {
@@ -39,20 +45,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onFormChanges() {
+  handleFormChanges() {
     this.loginForm.valueChanges.subscribe(values => {
 
       // TODO create validators for each control and track them
 
     });
-  }
-
-  get username() {
-    return this.loginForm.get('username');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
   }
 
   onSubmit(username: string, password: string) {
