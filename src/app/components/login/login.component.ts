@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import { LoginState } from './store';
 import { Login } from './store/login.actions';
@@ -14,9 +15,10 @@ import { isLoading } from './store/login.selector';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public isLoading: boolean;
   public loginForm: FormGroup;
+  public subscription$: Subscription;
 
   get username() {
     return this.loginForm.get('username');
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.select(isLoading).subscribe((status: boolean) =>  this.isLoading = status);
+    this.subscription$ = this.store.select(isLoading).subscribe((status: boolean) =>  this.isLoading = status);
 
     this.createLoginForm();
     this.handleFormChanges();
@@ -57,4 +59,10 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(new Login({ username, password }));
   }
 
+  ngOnDestroy() {
+    if (this.subscription$) {
+      this.subscription$.unsubscribe();
+    }
+
+  }
 }
