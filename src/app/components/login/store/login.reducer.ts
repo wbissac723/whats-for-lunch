@@ -14,11 +14,16 @@ export function loginReducer(state = initialState, action: LoginAction): LoginSt
 
     switch (action.type) {
 
-        // case LoginActions.LOGIN: {
-
-        // }
+        case LoginActions.LOGIN: {
+            console.log('Logging into account.');
+            return {
+                ...state,
+                loading: true
+            };
+        }
 
         case LoginActions.LOGIN_SUCCESS: {
+            console.log('Login was successful!');
             return {
                 ...state,
                 loading: false,
@@ -28,6 +33,7 @@ export function loginReducer(state = initialState, action: LoginAction): LoginSt
         }
 
         case LoginActions.LOGIN_FAIL: {
+            console.log('login failed!');
             return {
                 ...state,
                 loading: false,

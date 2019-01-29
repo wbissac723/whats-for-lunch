@@ -9,3 +9,9 @@ export const getLoggedState = createSelector(
     getLoginFeatureState,
     (state: LoginState) => state.loggedIn
 );
+
+export const isLoading = createSelector(
+    getLoginFeatureState,
+    (state: LoginState) => state.loading
+);
+

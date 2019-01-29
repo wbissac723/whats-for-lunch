@@ -15,6 +15,8 @@ import { reducers } from './store';
 // In memory database
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DatabaseService } from './database/database.service';
+import { EffectsModule } from '@ngrx/effects';
+import { LoginEffects } from './components/login/store/login.effects';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { DatabaseService } from './database/database.service';
     HttpClientModule,
     LoginModule,
     NewAccountModule,
+    EffectsModule.forRoot([LoginEffects]),
     StoreModule.forRoot(reducers),
   ],
   providers: [],

@@ -13,13 +13,13 @@ export class Login implements Action {
 
     constructor(readonly payload: { username: string, password: string}) {}
 }
-export class LoginUserSuccess implements Action {
+export class LoginSuccess implements Action {
     readonly type = LoginActions.LOGIN_SUCCESS;
 }
 
-export class LoginUserFail implements Action {
+export class LoginFail implements Action {
     readonly type = LoginActions.LOGIN_FAIL;
 }
 
 
-export type LoginAction = Login | LoginUserSuccess | LoginUserFail;
+export type LoginAction = Login | LoginSuccess | LoginFail;
