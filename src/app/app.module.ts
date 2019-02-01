@@ -18,6 +18,7 @@ import { DatabaseService } from './database/database.service';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginEffects } from './components/login/store/login.effects';
 import { UserAccountModule } from './components/user-account/user-account.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { UserAccountModule } from './components/user-account/user-account.module
     EffectsModule.forRoot([LoginEffects]),
     StoreModule.forRoot(reducers),
     UserAccountModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

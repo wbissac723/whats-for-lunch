@@ -1,9 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import { AppState } from './store';
 import { getLoggedState } from './components/login/store/login.selector';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,13 +15,14 @@ import { getLoggedState } from './components/login/store/login.selector';
 export class AppComponent implements OnInit {
   public loggedIn: boolean;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private route: Router, private store: Store<AppState>) {
     this.store.select(getLoggedState)
       .subscribe((status: boolean) => this.loggedIn = status);
   }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-
+  logout() {
+    this.route.navigate(['/login']);
   }
 }

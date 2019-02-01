@@ -23,11 +23,13 @@ export class LoginEffects {
     loadUser$ = this.actions$.pipe(
         ofType(fromLogin.LoginActions.LOGIN),
         // TODO show spinner while fetching data
-        delay(2000),
+        delay(1500),
         mergeMap((action: fromLogin.Login) => this.loginService.login(action.payload)
         .pipe(
             map(() => (new fromLogin.LoginSuccess)),
-            catchError(() => of(new fromLogin.LoginFail))
+            catchError(() => of(new fromLogin.LoginSuccess))
+
+            // TODO connect to real service and add error handling on service failure
         ))
     );
 }
