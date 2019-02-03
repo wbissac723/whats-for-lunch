@@ -2,12 +2,12 @@
 <section class="container mb-5">
 
 
-  <span *ngIf="!loggedIn" class="mr-4">
-    <a routerLink="/create_account">Create Account </a>
+  <span *ngIf="!loggedIn && showCreateAccountText" class="mr-4">
+    <a (click)="showCreateAccount()">Create Account </a>
   </span>
 
-  <span *ngIf="!loggedIn">
-    <a routerLink="/login"> Login</a>
+  <span *ngIf="!loggedIn && showLoginText">
+    <a (click)="showLogin()"> Login</a>
   </span>
 
   <span *ngIf="loggedIn">
