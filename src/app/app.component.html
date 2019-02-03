@@ -1,9 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<section class="container">
+<section class="container mb-5">
 
-  <p>User logged in: {{ loggedIn }}</p>
 
-  <span *ngIf="!loggedIn">
+  <span *ngIf="!loggedIn" class="mr-4">
     <a routerLink="/create_account">Create Account </a>
   </span>
 
@@ -21,3 +20,5 @@
   <router-outlet></router-outlet>
 
 </section>
+
+<p>Logged in: {{ loggedIn }}</p>
