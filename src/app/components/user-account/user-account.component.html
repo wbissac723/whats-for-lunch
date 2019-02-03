@@ -1,5 +1,26 @@
 <section>
+  <h3>Welcome {{ username | titlecase }}</h3>
+</section>
 
-    <h3>Welcome {{ username | titlecase }}</h3>
 
+<section class="mt-5">
+  <form>
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Select a food category</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option>Barbeque</option>
+        <option>Indian</option>
+        <option>Italian</option>
+        <option>Mediterranean</option>
+        <option>Mexican</option>
+        <option>Pizza</option>
+        <option>Soul Food</option>
+        <option>Vegan</option>
+        <option>Vegetarian</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-submit">Find Something</button>
+  </form>
 </section>
