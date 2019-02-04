@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FacebookLoginService } from './services/facebook-login.service';
+import { Component, OnInit, OnDestroy,NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
@@ -7,7 +8,10 @@ import { Subscription } from 'rxjs';
 import { LoginState } from './store';
 import { Login } from './store/login.actions';
 import { isLoading } from './store/login.selector';
+import { Router } from '@angular/router';
 
+
+declare const FB: any;
 
 @Component({
   selector: 'app-login',
@@ -29,19 +33,43 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
+    private zone: NgZone,
+    private router:Router,
+    private facebookLoginService: FacebookLoginService,
     private store: Store<LoginState>
   ) { }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(isLoading).subscribe((status: boolean) =>  this.isLoading = status);
-
+    this.subscription$ = this.store.select(isLoading).subscribe((status: boolean) => this.isLoading = status);
+    this.facebookLoginService.registerFacebookSDK();
     this.createLoginForm();
     this.handleFormChanges();
   }
+  submitLogin() {
+    console.log('submit login to fb');
+    FB.login((response) => {
+      console.log('submitlogin', response);
+      if (response.authResponse) {
+         this.facebookLoginService.getUserDetails(response.authResponse.userID).subscribe((data) =>{
+          if(data !=null){
+            console.log('data is '+data);
+          //Reference :https://stackoverflow.com/questions/44745354/ngoninit-not-being-called-after-router-navigate/47480431#47480431
+          this.zone.run(() => {
+            this.router.navigate([`/user/${data}`]);
+          });
+          }
+          
+        });
+      }
+      else {
+        console.log('user login failed');
+      }
+    });
+  }
 
   createLoginForm() {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
