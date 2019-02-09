@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
-
+import { NgZone } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +12,23 @@ export class LoginService {
 
   userName;
 
-
   constructor(
-    private firebaseAuth: AngularFireAuth,
-    private router: Router
+    private firebase: AngularFireAuth,
+    private router: Router,
+    private zone: NgZone,
   ) { }
 
-
   loginWithGoogle() {
-    this.firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider)
+    this.firebase.auth.signInWithPopup(new auth.GoogleAuthProvider)
       .then((data) => {
         this.userName = data.user.displayName;
-        this.router.navigate(['/user/' + this.userName]);
+        this.zone.run(() => {
+          this.router.navigate(['/user/' + this.userName]);
+        });
       });
   }
 
-
   logout() {
-    this.firebaseAuth.auth.signOut();
+    this.firebase.auth.signOut();
   }
 }
