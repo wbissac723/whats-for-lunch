@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Store } from '@ngrx/store';
-import { AppState } from './store';
-import { getLoggedState } from './components/login/store/login.selector';
 
 
 @Component({
@@ -18,10 +15,7 @@ export class AppComponent implements OnInit {
   public showCreateAccountText: boolean;
 
 
-  constructor(private router: Router, private store: Store<AppState>) {
-    this.store.select(getLoggedState)
-      .subscribe((status: boolean) => this.loggedIn = status);
-  }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.showLoginText = false;
