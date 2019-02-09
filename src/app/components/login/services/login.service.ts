@@ -9,8 +9,12 @@ import { NgZone } from '@angular/core';
   providedIn: 'root'
 })
 export class LoginService {
+  public userName;
+  private _authenticated: boolean;
 
-  userName;
+  get authenticated(): boolean {
+    return this._authenticated;
+  }
 
   constructor(
     private firebase: AngularFireAuth,
@@ -20,18 +24,21 @@ export class LoginService {
 
   loginWithGoogle() {
     this.firebase.auth.signInWithPopup(new auth.GoogleAuthProvider)
-      .then((data) => {
+      .then((data) => {    // TODO convert promise to an observable
+        this._authenticated = true;
         this.userName = data.user.displayName;
+
         this.zone.run(() => {
           this.router.navigate(['/user/' + this.userName]);
         });
       });
   }
 
+  // TODO implementation not complete
   loginWithFacebook() {
     this.firebase.auth.signInWithPopup(new auth.FacebookAuthProvider)
      .then((data) => {
-       console.log(JSON.stringify, null , 4);
+       console.log(JSON.stringify(data, null , 4));
      });
   }
 
