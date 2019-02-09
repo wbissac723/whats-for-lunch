@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { AppState } from '../../store';
-import * as fromLogin from '../login/store/login.actions';
 
 
 @Component({
@@ -18,8 +16,7 @@ export class UserAccountComponent implements OnInit {
   public username: string;
 
   constructor(
-    private route: ActivatedRoute,
-    private store: Store<AppState>
+    private route: ActivatedRoute
   ) {
     this.username = this.route.snapshot.paramMap.get('username');
   }
@@ -28,7 +25,6 @@ export class UserAccountComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.store.dispatch(new fromLogin.LoginSuccess);
   }
 
 }
