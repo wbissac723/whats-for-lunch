@@ -16,7 +16,7 @@ declare const FB: any;
 
 export class LoginComponent implements OnInit, OnDestroy {
   public isLoading: boolean;
-  public subscription$: Subscription;
+  public subscription$: Subscription[];
 
 
   constructor(
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
 
-  submitLogin() {
+  loginFacebook() {
     console.log('submit login to fb');
     FB.login((response) => {
       console.log('submitlogin', response);
@@ -56,10 +56,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
+  loginGoogle() {
+    return null;
+  }
 
   ngOnDestroy() {
     if (this.subscription$) {
-      this.subscription$.unsubscribe();
+      // this.subscription$.unsubscribe();
     }
 
   }
