@@ -1,0 +1,35 @@
+.create-box {
+  margin: 30px 0px 0px 0px;
+  padding: 0px 25px;
+}
+
+.search-box {
+  margin: 50px 0px 30px 0px;
+  padding: 0px 25px;
+}
+
+.user-welcome {
+  margin: 100px 0px 50px 0px;
+  padding: 0px 20px;
+}
+
+h5 {
+  font-family: 'Lobster', cursive;
+  font-weight: 100;
+}
+
+label {
+  font-family: 'Lobster', cursive;
+  font-weight: 300;
+}
+
+input::placeholder {
+  font-family: 'Lobster', cursive;
+}
+
+
+#logo {
+  height: 80px;
+  width: 80px;
+  margin: 10px auto 30px auto;
+}

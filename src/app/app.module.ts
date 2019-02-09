@@ -13,18 +13,23 @@ import { UserAccountModule } from './components/user-account/user-account.module
 // In memory database
 import { DatabaseService } from './database/database.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
+
+// Material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    InMemoryWebApiModule.forRoot(DatabaseService),
+    BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    InMemoryWebApiModule.forRoot(DatabaseService),
     LoginModule,
-    UserAccountModule,
-    RouterModule
+    RouterModule,
+    UserAccountModule
   ],
   providers: [],
   bootstrap: [AppComponent]
