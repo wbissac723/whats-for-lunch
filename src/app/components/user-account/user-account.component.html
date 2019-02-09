@@ -3,7 +3,7 @@
 <section class="text-center">
 
   <section class="user-welcome">
-    <h5> {{ 'jacob'| titlecase }} it looks like you are not currently part of a tribe.</h5>
+    <h5> {{ username | titlecase }} it looks like you are not currently part of a tribe.</h5>
   </section>
 
 
@@ -43,3 +43,9 @@
   </section>
 
 </section>
+
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{item.name}}
+  </li>
+</ul>

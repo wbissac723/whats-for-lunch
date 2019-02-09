@@ -13,11 +13,16 @@ import { UserAccountModule } from './components/user-account/user-account.module
 // In memory database
 import { DatabaseService } from './database/database.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
 
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+
+
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,9 +32,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(DatabaseService),
+    AngularFireModule.initializeApp(environment.firebase),
     LoginModule,
     RouterModule,
-    UserAccountModule
+    UserAccountModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login/services/login.service';
+
+
 
 @Component({
   selector: 'app-user-account',
@@ -11,12 +14,13 @@ import { Component, OnInit } from '@angular/core';
 export class UserAccountComponent implements OnInit {
 
 
-  public username: string;
+  username: string;
 
 
-  constructor(private route: ActivatedRoute) {
-    this.username = this.route.snapshot.paramMap.get('username');
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private loginService: LoginService
+    ) { this.username = this.loginService.userName; }
 
 
   ngOnInit() { }

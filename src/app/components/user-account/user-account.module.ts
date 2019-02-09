@@ -5,11 +5,17 @@ import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
 import { UserNavbarModule } from '../user-navbar/user-navbar.module';
 
 @NgModule({
-  declarations: [UserAccountComponent, UserNavbarComponent],
-  exports: [UserAccountComponent, UserNavbarComponent],
+  declarations: [
+    UserAccountComponent,
+    UserNavbarComponent
+  ],
+  exports: [
+    UserAccountComponent,
+    UserNavbarComponent
+  ],
   imports: [
     CommonModule,
-    UserNavbarModule
+    UserNavbarModule,
   ]
 })
 export class UserAccountModule { }

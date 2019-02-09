@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { FacebookLoginService } from './services/facebook-login.service';
+import { LoginService } from './services/login.service';
+
+
 
 
 declare const FB: any;
@@ -22,42 +24,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private zone: NgZone,
     private router: Router,
-    private facebookLoginService: FacebookLoginService,
+    private loginService: LoginService
   ) { }
 
 
-  ngOnInit() {
-    this.facebookLoginService.registerFacebookSDK();
-  }
+  ngOnInit() { }
 
-
-  loginFacebook() {
-    console.log('submit login to fb');
-    FB.login((response) => {
-      console.log('submitlogin', response);
-      if (response.authResponse) {
-
-        this.facebookLoginService.getUserDetails(response.authResponse.userID).subscribe((data) => {
-
-          if (data != null) {
-            console.log('data is ' + data);
-
-            // Reference :https://stackoverflow.com/questions/44745354/ngoninit-not-being-called-after-router-navigate/47480431#47480431
-
-            this.zone.run(() => {
-              this.router.navigate([`/user/${data}`]);
-            });
-          }
-
-        });
-      } else {
-        console.log('user login failed');
-      }
-    });
-  }
 
   loginGoogle() {
-    return null;
+    this.loginService.loginWithGoogle();
   }
 
   ngOnDestroy() {
