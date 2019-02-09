@@ -28,6 +28,13 @@ export class LoginService {
       });
   }
 
+  loginWithFacebook() {
+    this.firebase.auth.signInWithPopup(new auth.FacebookAuthProvider)
+     .then((data) => {
+       console.log(JSON.stringify, null , 4);
+     });
+  }
+
   logout() {
     this.firebase.auth.signOut();
   }

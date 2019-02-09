@@ -26,6 +26,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginService.loginWithGoogle();
   }
 
+  loginFacebook() {
+    this.loginService.loginWithFacebook();
+  }
+
   ngOnDestroy() {
     if (this.subscription$) {
       // this.subscription$.unsubscribe();
