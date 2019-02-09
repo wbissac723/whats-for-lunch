@@ -1,6 +1,4 @@
-import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
-//import { of } from 'rxjs/observable/of';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 declare const FB;
@@ -27,42 +25,62 @@ export class FacebookLoginService {
     };
 
     (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
+
+      let js;
+      const fjs = d.getElementsByTagName(s)[0];
+
       if (d.getElementById(id)) { return; }
+
       js = d.createElement(s); js.id = id;
+
       js.src = 'https://connect.facebook.net/en_US/sdk.js';
+
       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+
+    }
+
+      (document, 'script', 'facebook-jssdk'));
   }
 
   getLoginStatus() {
+
     FB.getLoginStatus(function (response) {
+
       console.log(response);
       // statusChangeCallback(response);
-    })
+
+    });
   }
 
   getUserDetails(usedId: string): Observable<string> {
+
     let userName: string;
+
     console.log('userid is' + usedId);
+
     return new Observable(observer => {
+
       FB.api('/' + usedId, {
         fields: 'id,name'
       },
         (response) => {
+
           console.log(response);
 
           if (response && !response.error) {
 
             userName = response.name;
+
             console.log('username is ' + userName);
+
             observer.next(userName);
-          }
-          else {
+
+          } else {
+
             console.log('error');
+
           }
         });
-    })
-  };
+    });
+  }
 }
-
