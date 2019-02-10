@@ -12,6 +12,7 @@ import { LoginService } from '../login/services/login.service';
 export class UserAccountComponent implements OnInit {
 
   public username: string;
+  public tribeMember: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,6 +21,8 @@ export class UserAccountComponent implements OnInit {
       this.username = this.loginService.userName;
     }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.tribeMember = true;
+  }
 }
 

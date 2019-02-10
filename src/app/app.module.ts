@@ -37,7 +37,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     RouterModule,
     UserAccountModule,
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

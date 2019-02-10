@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserAccountComponent } from './user-account.component';
-import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
+
+// Feature Modules
+import { UserHubModule } from './components/user-hub/user-hub.module';
 import { UserNavbarModule } from '../user-navbar/user-navbar.module';
+
+// Components
+import { UserAccountComponent } from './user-account.component';
+import { UserHubComponent } from './components/user-hub/user-hub.component';
+import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
 
 @NgModule({
   declarations: [
@@ -11,11 +17,12 @@ import { UserNavbarModule } from '../user-navbar/user-navbar.module';
   ],
   exports: [
     UserAccountComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
   ],
   imports: [
     CommonModule,
     UserNavbarModule,
+    UserHubModule
   ]
 })
 export class UserAccountModule { }

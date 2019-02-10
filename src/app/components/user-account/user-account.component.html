@@ -1,32 +1,34 @@
 <app-user-navbar> </app-user-navbar>
 
-<section class="text-center">
+<section *ngIf="!tribeMember" class="text-center">
 
   <section class="user-welcome">
-    <h5> {{ username | titlecase }} it looks like you are not currently part of a tribe.</h5>
+    <h4> {{ username || 'isaac723' | titlecase }},</h4>
+      <h5> it looks like you are not currently part of a tribe.</h5>
   </section>
-
 
   <img id="logo" src="../../../assets/logo.jpeg">
 
+  <form>
+    <section class="search-box">
 
-  <section class="search-box">
-    <form>
       <label>
         Find your tribe.
       </label>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search for your tribe." aria-label="Recipient's username"
-          aria-describedby="basic-addon2">
+        <input type="text" class="form-control"
+          placeholder="Enter a tribe name."
+          aria-label=""
+          aria-describedby="">
         <div class="input-group-append">
+
           <button class="btn  btn-danger btn-submit" type="button">Search</button>
         </div>
       </div>
-    </form>
-  </section>
 
-  <section class="create-box">
-    <form>
+    </section>
+
+    <section class="create-box">
 
       <label>
         Create your own tribe.
@@ -39,13 +41,10 @@
           <button class="btn  btn-danger btn-primary" type="button">Create</button>
         </div>
       </div>
-    </form>
-  </section>
+
+    </section>
+  </form>
 
 </section>
 
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.name}}
-  </li>
-</ul>
+<app-user-hub *ngIf="tribeMember"></app-user-hub>
