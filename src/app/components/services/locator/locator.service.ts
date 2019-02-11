@@ -5,12 +5,13 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
 })
 export class LocatorService {
-    private yelpUrl = 'https://api.yelp.com/v3/businesses/search?location=';
+    private url = 'https://api.yelp.com/v3/businesses/search?location=';
 
     constructor(private http: HttpClient) { }
 
     getRestaurants(location: string, category: string) {
-        const url = `${this.yelpUrl}${location}&categories=${category}`;
+        const url = this.url + location + '&categories=' + category;
+
         return this.http.get(url);
     }
 }
