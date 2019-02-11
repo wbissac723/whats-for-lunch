@@ -36,11 +36,12 @@ export class UserHubComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Finding food');
     this.locator.getRestaurants(this.location.value, this.category.value)
-      .subscribe((data) => {
-
-      });
+      .subscribe(
+        (response) => { console.log(JSON.stringify(response, null, 3));
+        },
+        (error) => { console.log('service call failed' + JSON.stringify(error, null, 3));
+    });
   }
 
 }

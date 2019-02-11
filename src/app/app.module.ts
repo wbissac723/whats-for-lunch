@@ -23,6 +23,8 @@ import { environment } from 'src/environments/environment';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FoodLocatorInterceptor } from './components/interceptors/food-locator.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +41,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFirestoreModule,
     AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
