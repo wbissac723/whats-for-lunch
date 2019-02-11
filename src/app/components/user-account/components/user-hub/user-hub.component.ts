@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
+import { LocatorService } from '../../../services/locator/locator.service';
 @Component({
   selector: 'app-user-hub',
   templateUrl: './user-hub.component.html',
@@ -7,9 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHubComponent implements OnInit {
 
-  constructor() { }
+  searchForm: FormGroup;
+
+  constructor(
+    private locator: LocatorService,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.buildSearchForm();
+  }
+
+  get location(): AbstractControl {
+    return this.searchForm.get('location');
+  }
+
+  get category(): AbstractControl {
+    return this.searchForm.get('category');
+  }
+
+  buildSearchForm() {
+    this.searchForm = this.fb.group({
+      location: ['', Validators.required],
+      category: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    console.log('Finding food');
+    this.locator.getRestaurants(this.location.value, this.category.value)
+      .subscribe((data) => {
+
+      });
   }
 
 }
