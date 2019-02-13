@@ -4,38 +4,18 @@
 </section>
 
 
-<section *ngIf="!isLoading" class="justify-content-center">
+<section *ngIf="!isLoading" class="text-center">
 
-  <h3>Meal Vote</h3>
+  <h2>Meal Vote</h2>
 
   <img id="logo" src="../../../assets/logo.jpeg">
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
+  <div class="form-group">
 
-      <input type="text" class="form-control input-text-box" id="username" placeholder="Enter user name"
-        formControlName="username">
-
-      <small *ngIf="username.touched && username.invalid" class="text-danger">Username is required.</small>
+    <button type="button" class="btn btn-primary btn-login" (click)="loginFacebook();">Login with Facebook</button>
+    <button type="button" class="btn btn-danger btn-login" (click)="loginGoogle();">Login with Google</button>
+  </div>
 
 
-    </div>
-
-    <div class="form-group">
-
-      <input type="password" class="form-control input-text-box" id="password" placeholder="Enter password"
-        formControlName="password">
-
-      <small *ngIf="password.touched && password.invalid" class="text-danger">Password is required.</small>
-
-    </div>
-
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-submit" (click)="onSubmit(username.value, password.value)"
-        [disabled]="!loginForm.valid">Login</button> &nbsp;&nbsp;
-        <button type="button" class="btn btn-primary" (click)="submitLogin();">Login with facebook</button>
-    </div>
-
-  </form>
 </section>

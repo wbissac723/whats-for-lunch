@@ -1,12 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
-
-import { AppState } from '../../store';
-import * as fromLogin from '../login/store/login.actions';
-
-
+// Services
+import { LoginService } from '../login/services/login.service';
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -19,16 +15,11 @@ export class UserAccountComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>
-  ) {
-    this.username = this.route.snapshot.paramMap.get('username');
-  }
+    private loginService: LoginService
+    ) {
+      this.username = this.loginService.userName;
+    }
 
-
-
-
-  ngOnInit() {
-    // this.store.dispatch(new fromLogin.LoginSuccess);
-  }
-
+  ngOnInit() { }
 }
+

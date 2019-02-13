@@ -1,24 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { LoginModule } from '../login.module';
-import { LoginCredentials } from '../models/login.model';
 import { Router } from '@angular/router';
 
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
+import { NgZone } from '@angular/core';
 
-@Injectable({ providedIn: LoginModule})
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginService {
-    private url = '';
 
-    constructor(private http: HttpClient, private router: Router) {}
+  userName;
 
-    login(credentials: LoginCredentials) {
-        const username = credentials.username;
+  constructor(
+    private firebase: AngularFireAuth,
+    private router: Router,
+    private zone: NgZone,
+  ) { }
 
-        this.router.navigate([`/user/${username}`]);
-        return this.http.post(this.url, credentials);
+  loginWithGoogle() {
+    this.firebase.auth.signInWithPopup(new auth.GoogleAuthProvider)
+      .then((data) => {
+        this.userName = data.user.displayName;
+        this.zone.run(() => {
+          this.router.navigate(['/user/' + this.userName]);
+        });
+      });
+  }
 
-    }
-
-
+  logout() {
+    this.firebase.auth.signOut();
+  }
 }

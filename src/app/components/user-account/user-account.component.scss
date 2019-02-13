@@ -1,13 +1,35 @@
-.input-text-box {
-  width: 80%;
+.create-box {
+  margin: 30px 0px 0px 0px;
+  padding: 0px 25px;
 }
 
-.form-control:focus {
-  border-color: #7952b3;
-  box-shadow: 0 0 0 3px rgba(121, 82, 179, .25);
+.search-box {
+  margin: 50px 0px 30px 0px;
+  padding: 0px 25px;
 }
 
-.btn-submit {
-  background-color: rgb(70, 40, 140);
-  border: #7952b3;
+.user-welcome {
+  margin: 100px 0px 50px 0px;
+  padding: 0px 20px;
+}
+
+h5 {
+  font-family: 'Lobster', cursive;
+  font-weight: 100;
+}
+
+label {
+  font-family: 'Lobster', cursive;
+  font-weight: 300;
+}
+
+input::placeholder {
+  font-family: 'Lobster', cursive;
+}
+
+
+#logo {
+  height: 80px;
+  width: 80px;
+  margin: 10px auto 30px auto;
 }

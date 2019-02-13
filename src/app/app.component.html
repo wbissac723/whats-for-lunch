@@ -1,9 +1,4 @@
-<section class="container mb-1">
-
-
-  <span *ngIf="!loggedIn && showCreateAccountText" class="mr-4">
-    <a (click)="showCreateAccount()">Create Account </a>
-  </span>
+<section>
 
   <span *ngIf="!loggedIn && showLoginText">
     <a (click)="showLogin()"> Login</a>
@@ -19,5 +14,3 @@
   <router-outlet></router-outlet>
 
 </section>
-
-<p>Logged in: {{ loggedIn }}</p>
