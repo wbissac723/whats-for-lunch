@@ -14,8 +14,10 @@ export class FoodLocatorInterceptor implements HttpInterceptor {
         const token = token1 + token2;
 
         const authRequest = req.clone({
-
-            headers: req.headers.set('Authorization', 'Bearer ' + token)
+            setHeaders:{
+                Authorization: 'Bearer'+ token,
+                'Access-Control-Allow-Origin': '*'
+            }
 
         });
 
