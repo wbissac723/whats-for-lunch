@@ -11,11 +11,20 @@
   <img id="logo" src="../../../assets/logo.jpeg">
 
 
-  <div class="form-group">
 
-    <button type="button" class="btn btn-primary btn-login" (click)="loginFacebook();">Login with Facebook</button>
+  <div class="form-group">
     <br>
-    <button type="button" class="btn btn-danger btn-login" (click)="loginGoogle();">Login with Google</button>
+    <br>
+
+    <a (click)="loginGoogle()">
+      <img role="button" src="../../../assets/buttons/btn_google_signin_light_normal_web.png">
+    </a>
+
+    <br>
+    <br>
+    <div class="fb-login-button" data-size="large" data-button-type="login_with" data-auto-logout-link="false"
+      data-use-continue-as="false"></div>
+
   </div>
 
 
