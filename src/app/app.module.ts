@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
 import { FoodLocatorInterceptor } from './components/interceptors/food-locator.interceptor';
+import { RestaurantModule } from './components/restaurant/restaurant.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +43,7 @@ import { FoodLocatorInterceptor } from './components/interceptors/food-locator.i
     AngularFireAuthModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

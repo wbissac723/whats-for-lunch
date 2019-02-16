@@ -9,11 +9,12 @@ import { UserNavbarModule } from '../user-navbar/user-navbar.module';
 import { UserAccountComponent } from './user-account.component';
 import { UserHubComponent } from './components/user-hub/user-hub.component';
 import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
+import { RestaurantModule } from '../restaurant/restaurant.module';
 
 @NgModule({
   declarations: [
     UserAccountComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
   ],
   exports: [
     UserAccountComponent,
@@ -22,7 +23,8 @@ import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
   imports: [
     CommonModule,
     UserNavbarModule,
-    UserHubModule
+    UserHubModule,
+    RestaurantModule
   ]
 })
 export class UserAccountModule { }
