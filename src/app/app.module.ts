@@ -34,7 +34,7 @@ import { RestaurantModule } from './components/restaurant/restaurant.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(DatabaseService),
+    // InMemoryWebApiModule.forRoot(DatabaseService),
     AngularFireModule.initializeApp(environment.firebase),
     LoginModule,
     RouterModule,
@@ -42,9 +42,7 @@ import { RestaurantModule } from './components/restaurant/restaurant.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true }
-  ],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
