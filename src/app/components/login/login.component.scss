@@ -6,8 +6,13 @@ h2 {
   font-family: 'Lobster', cursive;
 }
 
+a {
+  cursor: pointer;
+}
+
 button {
   font-family: 'Lobster', cursive;
+  max-width: 300px;
 }
 
 .btn-login {

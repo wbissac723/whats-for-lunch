@@ -1,5 +1,10 @@
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -17,12 +22,10 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 
-
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FoodLocatorInterceptor } from './components/interceptors/food-locator.interceptor';
+import { RestaurantModule } from './components/restaurant/restaurant.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,9 +40,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     RouterModule,
     UserAccountModule,
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

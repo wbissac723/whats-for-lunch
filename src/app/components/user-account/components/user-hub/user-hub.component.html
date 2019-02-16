@@ -1,0 +1,51 @@
+<section id="userHubSection">
+
+  <h5>{{ tribe || 'Food Lovers' | titlecase }} Tribe</h5>
+  <br>
+
+  <span>View tribe members</span>
+
+<br>
+<br>
+
+
+
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+
+    <!-- location input field -->
+      <div class="form-group">
+        <label for="locationInput">Where do you want to eat?</label>
+        <input type="text"
+        class="form-control"
+        id="locationInput"
+        placeholder="Enter location"
+        formControlName="location">
+      </div>
+
+      <!-- food category options -->
+      <div class="form-group">
+          <label for="categoryInput">Select Category</label>
+          <select class="form-control"
+            formControlName="category"
+             id="categoryInput">
+
+              <option value="barbecue">Barbecue</option>
+              <option value="deli">Deli</option>
+              <option value="indian">Indian</option>
+              <option value="italian">Italian</option>
+              <option value="mediterranean">Mediterranean</option>
+              <option value="mexican">Mexican</option>
+              <option value="pizza">Pizza</option>
+              <option value="soul food">Soul Food</option>
+
+          </select>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Find Food</button>
+      </div>
+
+    </form>
+
+
+</section>
