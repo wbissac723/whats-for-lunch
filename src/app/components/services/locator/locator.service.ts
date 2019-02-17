@@ -23,6 +23,6 @@ export class LocatorService {
 
         const body = { url: request };
 
-        return this.http.post(this.url, body );
+        return this.http.post(this.url, body);
     }
 }
