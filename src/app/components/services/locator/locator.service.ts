@@ -14,7 +14,7 @@ export class LocatorService {
     private url: string;
 
     constructor(private http: HttpClient) {
-        this.url = (this.appEnvironment) ? 'productionURL' : 'localhost:/3000/api/restaurants/';
+        this.url = (this.appEnvironment) ? 'productionURL' : '/api/restaurants/';
     }
 
     getRestaurants(search: SearchParams): Observable<any> {

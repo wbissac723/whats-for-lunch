@@ -9,7 +9,7 @@ const bearerToken = 'a63vBF5N-p5D2w05KaYF78UVcBV99NK1P6Z3tyVsWZLGHcSWays53-lnAOs
 
 
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
 
   const options = {
 
