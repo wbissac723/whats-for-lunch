@@ -44,10 +44,12 @@ export class UserHubComponent implements OnInit {
 
     this.locator.getRestaurants(this.searchQuery)
       .subscribe(
-        (response) => { console.log(JSON.stringify(response, null, 3));
+        (response) => {
+          console.log('Successfully retrieved restaurants');
         },
-        (error) => { console.log('service call failed' + JSON.stringify(error, null, 3));
-    });
+        (error) => {
+          console.log('Service call failed. ' + JSON.stringify(error, null, 3));
+        });
   }
 
 }

@@ -7,9 +7,9 @@ import { UserNavbarModule } from '../user-navbar/user-navbar.module';
 
 // Components
 import { UserAccountComponent } from './user-account.component';
-import { UserHubComponent } from './components/user-hub/user-hub.component';
 import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
 import { RestaurantModule } from '../restaurant/restaurant.module';
+import { NewAccountModule } from './components/new-account/new-account.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { RestaurantModule } from '../restaurant/restaurant.module';
     CommonModule,
     UserNavbarModule,
     UserHubModule,
-    RestaurantModule
+    RestaurantModule,
+    NewAccountModule
   ]
 })
 export class UserAccountModule { }
