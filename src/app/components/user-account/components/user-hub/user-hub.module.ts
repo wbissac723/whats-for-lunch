@@ -14,7 +14,7 @@ import { FoodLocatorInterceptor } from '../../../interceptors/food-locator.inter
     ReactiveFormsModule
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true }
   ]
 })
 export class UserHubModule { }
