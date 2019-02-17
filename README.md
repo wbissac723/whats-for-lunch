@@ -1,7 +1,7 @@
 # Meal Vote
 
 This project contains both a front-end application using the Angular CLI
-and a back-end API built with Express.
+and a back-end API built with [Express](https://expressjs.com/en/api.html).
 
 
 You will need to serve both simultaneously for http requests for function
@@ -10,9 +10,9 @@ properly.
 
 ## Serving Angular App
 
-1. In root directory run "npm install" from the terminal
+1. In root directory run `npm install` from the terminal
 
-2. Next run "npm run full-stack".
+2. Next run `npm run full-stack`.
 
 (This creates a proxy, which handles CORS issues that result from sending
 http requests to localhost.)
@@ -25,8 +25,8 @@ http requests to localhost.)
 
 2. Navigate to the root of the server directory
 
-3. Open the terminal and run "npm install"
+3. Open the terminal and run `npm install`
 
-4. Install Nodemon globally from the terminal "npm install -g nodemon"
+4. Install Nodemon globally from the terminal `npm install -g nodemon`
 
-5. Run "nodemon index" in the terminal to serve the api.
+5. Run `nodemon index` in the terminal to serve the api.
