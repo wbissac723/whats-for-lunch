@@ -24,17 +24,7 @@ router.get('/', async (req, res) => {
   request(options)
 
     .then((data) => {
-      const resta = JSON.parse(JSON.stringify(data));
-
-      // Filter out only needed properties from response
-      try {
-        resta = _.pick(resta, ['total']);
-        console.log(resta);
-
-      } catch (ex) {
-        console.log('error' + ex);
-      }
-
+      console.log('Successful located restaurants.')
 
       res.status(200).send(data);
     })
@@ -43,7 +33,6 @@ router.get('/', async (req, res) => {
       console.log('Call failed: ' + JSON.stringify(err, null, 3));
 
       res.status(500).send('Unable to locate restaurants.');
-
     });
 
 });
