@@ -27,8 +27,8 @@ http requests to localhost.)
 
 2. Navigate to the root of the server directory.
 
-3. Open the terminal and run `npm install`
+3. Open the terminal and run `npm install`.
 
-4. Install Nodemon globally from the terminal `npm install -g nodemon`
+4. Install Nodemon globally from the terminal `npm install -g nodemon`.
 
 5. Run `nodemon index` in the terminal to serve the api.
