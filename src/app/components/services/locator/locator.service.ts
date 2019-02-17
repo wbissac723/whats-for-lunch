@@ -1,17 +1,28 @@
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';;
+
+import { Observable } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
+import { SearchParams } from './search-params/search-params.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LocatorService {
-    private url = 'https://api.yelp.com/v3/businesses/search?location=';
-    constructor(private http: HttpClient) { }
+    private appEnvironment: boolean = environment.production;
+    private url: string;
 
-    getRestaurants(location: string, category: string): Observable<any> {
-        const url = this.url + location + '&categories=' + category;
+    constructor(private http: HttpClient) {
+        this.url = (this.appEnvironment) ? 'productionURL' : 'localhost:/3000/api/restaurants/';
+    }
 
-        return this.http.get(url);
+    getRestaurants(search: SearchParams): Observable<any> {
+        const endpoint = 'https://api.yelp.com/v3/businesses/search?location=';
+        const request = endpoint + search.location + '&categories=' + search.category;
+
+        const body = { url: request };
+
+        return this.http.post(this.url, body );
     }
 }

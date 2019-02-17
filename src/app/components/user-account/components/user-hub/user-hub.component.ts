@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 import { LocatorService } from '../../../services/locator/locator.service';
+import { SearchParams } from 'src/app/components/services/locator/search-params/search-params.model';
 @Component({
   selector: 'app-user-hub',
   templateUrl: './user-hub.component.html',
@@ -10,6 +11,7 @@ import { LocatorService } from '../../../services/locator/locator.service';
 export class UserHubComponent implements OnInit {
 
   searchForm: FormGroup;
+  searchQuery: SearchParams = new SearchParams();
 
   constructor(
     private locator: LocatorService,
@@ -36,7 +38,11 @@ export class UserHubComponent implements OnInit {
   }
 
   onSubmit() {
-    this.locator.getRestaurants(this.location.value, this.category.value)
+
+    this.searchQuery.location = this.location.value;
+    this.searchQuery.category = this.category.value;
+
+    this.locator.getRestaurants(this.searchQuery)
       .subscribe(
         (response) => { console.log(JSON.stringify(response, null, 3));
         },

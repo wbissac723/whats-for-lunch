@@ -4,7 +4,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -24,8 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from 'src/environments/environment';
 
-import { FoodLocatorInterceptor } from './components/interceptors/food-locator.interceptor';
-import { RestaurantModule } from './components/restaurant/restaurant.module';
 
 @NgModule({
   declarations: [AppComponent],
