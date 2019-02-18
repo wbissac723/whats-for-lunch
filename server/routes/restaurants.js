@@ -9,41 +9,40 @@ const router = express.Router();
 const bearerToken = 'a63vBF5N-p5D2w05KaYF78UVcBV99NK1P6Z3tyVsWZLGHcSWays53-lnAOsm8e5cy8DtyiPf6q-OW2l6jD4uv7hQ4sDEELTgqXcTNBB7yyV_10WZtBwTE06FiOhWXHYx';
 
 
-
 router.post('/', async (req, res) => {
-
   const options = {
-
-    uri: req.body.url, // yelp search url sent from the client
+    uri: req.body.url,
     headers: {
-      'Authorization': 'Bearer ' + bearerToken // api key
+      'Authorization': 'Bearer ' + bearerToken
     }
-
   };
 
   // Sends GET request to the YELP api to retrieve list of restaurants
   request(options)
-
     .then((data) => {
-      let response = transformResponse(data)
+      const response = transformResponse(data);
+      
       res.status(200).send(response);
     })
-
-    .catch((err) => {
-      console.log('Call failed: ' + JSON.stringify(err, null, 3));
-
-      res.status(500).send('Unable to locate restaurants.');
+    .catch(() => {
+      res.status(500).send('Internal server error occured.');
     });
-
 });
 
- var transformResponse= (data) =>{
-  var jsonObj =JSON.parse(data);
-  let transformedResponse  = []; 
-  let newdata= _.each(jsonObj.businesses,(value,key)=>{
-      transformedResponse.push(_.pick(value,['name','rating','image_url','is_closed','location','display_phone','url']));
-    })
+ var transformResponse = (data) => {
+    const jsonObj = JSON.parse(data);
+    let transformedResponse  = [];
+
+    _.each(jsonObj.businesses,(value) => {
+      transformedResponse.push(
+        _.pick(value,[
+          'name','rating','image_url','is_closed',
+          'location.display_address','display_phone',
+          'url'
+        ]));
+    });
+
     return transformedResponse;
- } 
+ }
 
 module.exports = router;
