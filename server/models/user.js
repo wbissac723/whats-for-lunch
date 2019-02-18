@@ -2,7 +2,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 
 
-const userSchema = new moongoose.Schema({
+const userSchema = new mongoose.Schema({
   userName: {
     type: String,
     required: true,
@@ -30,7 +30,7 @@ const User = mongoose.model('User', userSchema, 'User')
 
 function validateUser(user) {
   const schema = {
-    name: Joi.string().min(3).max(40).required(),
+    userName: Joi.string().min(3).max(40).required(),
     email: Joi.string().min(4).max(60).required(),
     tribe: Joi.string().min(4).max(25).required()
   }

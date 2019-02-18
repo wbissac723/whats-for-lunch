@@ -9,6 +9,7 @@ module.exports = function () {
   console.log('Connecting to MongoDB.');
 
   mongoose.connect(db, {
+    useCreateIndex: true,
     useNewUrlParser: true
   });
 

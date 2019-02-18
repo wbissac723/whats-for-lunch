@@ -6,7 +6,7 @@ const helmet = require('helmet');
 
 // Routes
 const restaurants = require('../routes/restaurants');
-const users = require('../routes/restaurants');
+const users = require('../routes/users');
 
 
 module.exports = function (app) {

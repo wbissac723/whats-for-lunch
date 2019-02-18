@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 
 
-
 require('./startup/routes')(app); // Configure routes
 require('./startup/database')(); // Connect to database
 
