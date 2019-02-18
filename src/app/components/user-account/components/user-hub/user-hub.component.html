@@ -49,3 +49,10 @@
 
 
 </section>
+
+<section *ngIf="searchSuccess">
+
+  <div *ngFor="let restaurant of restaurants" class="card mt-3">
+    {{ restaurant.name }}
+  </div>
+</section>
