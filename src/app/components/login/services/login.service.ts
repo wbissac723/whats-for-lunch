@@ -10,6 +10,7 @@ import { NgZone } from '@angular/core';
 })
 export class LoginService {
   public userName;
+  public userEmail;
   private _authenticated: boolean;
 
   get authenticated(): boolean {
@@ -27,6 +28,7 @@ export class LoginService {
       .then((data) => {    // TODO convert promise to an observable
         this._authenticated = true;
         this.userName = data.user.displayName;
+        this.userEmail = data.user.email;
 
         this.zone.run(() => {
           this.router.navigate(['/user/' + this.userName]);
