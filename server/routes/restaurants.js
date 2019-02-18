@@ -2,6 +2,7 @@
 
 const express = require('express');
 const request = require('request-promise-native')
+const _ = require('lodash');
 
 const router = express.Router();
 
@@ -24,9 +25,8 @@ router.post('/', async (req, res) => {
   request(options)
 
     .then((data) => {
-      console.log('Successful located restaurants.')
-
-      res.status(200).send(data);
+      let response = transformResponse(data)
+      res.status(200).send(response);
     })
 
     .catch((err) => {
@@ -37,5 +37,13 @@ router.post('/', async (req, res) => {
 
 });
 
+ var transformResponse= (data) =>{
+  var jsonObj =JSON.parse(data);
+  let transformedResponse  = []; 
+  let newdata= _.each(jsonObj.businesses,(value,key)=>{
+      transformedResponse.push(_.pick(value,['name','rating','image_url','is_closed','location','display_phone','url']));
+    })
+    return transformedResponse;
+ } 
 
 module.exports = router;
