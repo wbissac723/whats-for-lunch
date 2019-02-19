@@ -8,7 +8,8 @@
     <div class="col">
       <div class="card-body">
         <h5 class="card-title">{{ restaurant.name }}</h5>
-        <p class="card-text">{{ restaurant.address }}</p>
+        <p class="card-text">{{ restaurant.location?.line1 }}</p>
+        <p class="card-text">{{ restaurant.location?.line2 }}</p>
         <a href="#" class="btn btn-primary">Show Details</a>
       </div>
     </div>

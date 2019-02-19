@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 
 import { LocatorService } from '../../../services/locator/locator.service';
 import { SearchParams } from 'src/app/components/services/locator/search-params/search-params.model';
-import { Restaurant } from 'src/app/components/models/restaurant.model';
+import { Restaurant, Address } from 'src/app/components/models/restaurant.model';
 @Component({
   selector: 'app-user-hub',
   templateUrl: './user-hub.component.html',
@@ -63,13 +63,14 @@ export class UserHubComponent implements OnInit {
 
     response.forEach(obj => {
       const restaurant = new Restaurant();
-
       restaurant.imgURL = obj.image_url;
       restaurant.isClosed = obj.is_closed;
       restaurant.name = obj.name;
       restaurant.phoneNumber = obj.display_phone;
       restaurant.rating = obj.rating;
-
+      restaurant.location = new Address();
+      restaurant.location.line1 = obj.location.display_address[0];
+      restaurant.location.line2 = obj.location.display_address[1];
       restaurants.push(restaurant);
     });
 
