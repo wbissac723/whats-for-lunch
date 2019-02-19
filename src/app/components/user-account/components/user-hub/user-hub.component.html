@@ -46,10 +46,6 @@
 
 <section *ngIf="searchSuccess">
 
-  <div *ngFor="let restaurant of restaurants" class="card restaurant-card text-center mt-3">
-
-
-    <h4 class="card-title">{{ restaurant.name }}</h4>
-  </div>
+  <app-restaurant [restaurants]= restaurants></app-restaurant>
 
 </section>

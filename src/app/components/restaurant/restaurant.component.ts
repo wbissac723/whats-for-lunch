@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Input } from '@angular/core';
+import { Restaurant } from '../models/restaurant.model';
 
 @Component({
   selector: 'app-restaurant',
@@ -7,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantComponent implements OnInit {
 
+  @Input() restaurants : Restaurant[]; 
   constructor() { }
 
   ngOnInit() {}
