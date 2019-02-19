@@ -1,12 +1,16 @@
-<div *ngFor="let restaurant of restaurants">
-
-  <div class="card mb-3" style="width: 18rem;">
-    <li>{{ restaurant.name }}</li>
-    <li>{{ restaurant.category }}</li>
-    <li>{{ restaurant.address }}</li>
-    <li>{{ restaurant.hoursOfOperation}}</li>
+<div class="card mx-auto" style="Width:50%;"  *ngFor="let restaurant of restaurants">
+  <div class="row">
+    <div class="col-4" >
+      <div style="width: 100%" class=" card-header ">
+        <img style='object-fit: contain' class="card-img-top img-fluid" src='{{ restaurant.imgURL }}' alt="Card image cap">
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-body">
+        <h5 class="card-title">{{ restaurant.name }}</h5>
+        <p class="card-text">{{ restaurant.address }}</p>
+        <a href="#" class="btn btn-primary">Show Details</a>
+      </div>
+    </div>
   </div>
-
-
-
 </div>
