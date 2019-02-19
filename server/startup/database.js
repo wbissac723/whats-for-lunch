@@ -13,15 +13,15 @@ module.exports = function () {
     useNewUrlParser: true
   });
 
-  mongoose.connection.on('connected', () => console.log('Connected to MongoDB'));
+  mongoose.connection.on('connected', () => console.log('Successfully connected to database.'));
 
   mongoose.connection.on('error', (err) => console.log('MongoDB connection error: ' + err));
 
-  mongoose.connection.on('disconnected', () => console.log('MongoDB connection disconnected'));
+  mongoose.connection.on('disconnected', () => console.log('MongoDB connection disconnected.'));
 
   process.on('SIGINT', () => {
     mongoose.connection.close(function () {
-      console.log('MongoDB connection disconnected through app termination');
+      console.log('MongoDB connection disconnected through app termination.');
       process.exit(0);
     });
   });
