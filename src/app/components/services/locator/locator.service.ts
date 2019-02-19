@@ -19,7 +19,7 @@ export class LocatorService {
 
     getRestaurants(search: SearchParams): Observable<any> {
         const endpoint = 'https://api.yelp.com/v3/businesses/search?location=';
-        const request = endpoint + search.location + '&categories=' + search.category;
+        const request = `${endpoint}${search.location},${search.zipcode}&categories=${search.category}`;
 
         const body = { url: request };
 

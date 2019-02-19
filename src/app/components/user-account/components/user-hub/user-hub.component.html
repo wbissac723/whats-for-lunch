@@ -14,10 +14,17 @@
 
     <!-- location input field -->
     <div class="form-group">
-      <label for="locationInput">Where do you want to eat?</label>
-      <input type="text" class="form-control" id="locationInput" placeholder="Enter location" formControlName="location">
+      <div class="text-control">
+        <label for="locationInput">Where do you want to eat?</label>
+        <input type="text" class="form-control" id="locationInput" placeholder="Enter location" formControlName="location">
+      </div>
+      <div class="text-control">
+        <label for="zipcodeInput">
+          <input type="text" style="display:inline-block;" name="Area Zip code" id="zipcodeInput" class="form-control" placeholder="Enter Zipcode"
+            formControlName="zipCode">
+        </label>
+      </div>
     </div>
-
     <!-- food category options -->
     <div class="form-group">
       <label for="categoryInput">Select Category</label>
@@ -46,6 +53,6 @@
 
 <section *ngIf="searchSuccess">
 
-  <app-restaurant [restaurants]= restaurants></app-restaurant>
+  <app-restaurant [restaurants]=r estaurants></app-restaurant>
 
 </section>

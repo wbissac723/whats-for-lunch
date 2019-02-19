@@ -28,6 +28,9 @@ export class UserHubComponent implements OnInit {
   get location(): AbstractControl {
     return this.searchForm.get('location');
   }
+  get zipCode(): AbstractControl {
+    return this.searchForm.get('zipCode');
+  }
 
   get category(): AbstractControl {
     return this.searchForm.get('category');
@@ -36,6 +39,7 @@ export class UserHubComponent implements OnInit {
   buildSearchForm() {
     this.searchForm = this.fb.group({
       location: ['', Validators.required],
+      zipCode:[''],
       category: ['', Validators.required]
     });
   }
@@ -43,6 +47,7 @@ export class UserHubComponent implements OnInit {
   onSubmit() {
 
     this.searchQuery.location = this.location.value;
+    this.searchQuery.zipcode = this.zipCode.value;
     this.searchQuery.category = this.category.value;
 
     this.locator.getRestaurants(this.searchQuery)
