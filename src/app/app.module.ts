@@ -1,3 +1,4 @@
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -20,6 +21,8 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { environment } from 'src/environments/environment';
 
@@ -38,6 +41,7 @@ import { environment } from 'src/environments/environment';
     UserAccountModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
+    NgbModule.forRoot()
   ],
   providers: [  ],
   bootstrap: [AppComponent]
