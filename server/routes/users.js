@@ -3,55 +3,41 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-
+// Initialize the router
 const router = express.Router();
 
-const {
-  User,
-  validate
-} = require('../models/user');
+const { User, validate } = require('../models/user');
 
 
 // Add a new user to the database
 router.post('/', async (req, res) => {
 
   // Validate new user request body against userSchema
-  const {
-    error
-  } = validate(req.body);
+  const { error } = validate(req.body);
 
   // Request does not match userSchema
-  if (error) return res.status(400)
-    .json({
-      message: error.details[0].message
-    });
-
+  if (error) {
+    return res.status(400).json({message: error.details[0].message});
+  }
 
   let user;
 
-
   // Verify user does not already exist by checking email
-  user = await User.findOne({
-      email: req.body.email
-    })
-    .then((data) => {
-
-      if (user) {
+  user = await User.findOne({email: req.body.email}).exec()
+    .then((account) => {
+      // Return bad request if user already exists
+      if (account) {
         return res.status(400)
-          .json({
-            message: 'User is already registered.'
-          })
+          .json({message: 'User is already registered.'})
       }
     })
     .catch((err) => {
       return res.status(500)
-        .json({
-          message: 'Internal server error.'
-        });
+        .json({message: 'Internal server error.'});
     });
 
 
-  // Create a new user from the request body
+  // Create a new user from the request body properties
   user = new User({
     _id: new mongoose.Types.ObjectId(),
     userName: req.body.userName,
@@ -59,6 +45,7 @@ router.post('/', async (req, res) => {
     tribe: req.body.tribe
   });
 
+  // Store user in the database
   saveUser(user, res);
 });
 
@@ -66,7 +53,7 @@ router.post('/', async (req, res) => {
 function saveUser(user, res) {
   user.save()
     .then(() => {
-      console.log('Successfully created user.')
+      console.log(`Successfully created user ${user.userName}.`)
       return res.status(201)
         .json({
           message: 'Successfully created user.',
@@ -76,11 +63,8 @@ function saveUser(user, res) {
     .catch((err) => {
       console.log('Failed to create user: ' + err);
       return res.status(500)
-        .json({
-          message: 'Unable to create user.'
-        })
+        .json({message: 'Unable to create user.'})
     });
 }
-
 
 module.exports = router;

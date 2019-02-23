@@ -21,11 +21,13 @@ router.post('/', async (req, res) => {
   request(options)
     .then((data) => {
       const response = transformResponse(data);
-      
+
       res.status(200).send(response);
+      console.log(`Successfully retrieved ${response.length} restaurants.`)
     })
-    .catch(() => {
+    .catch((err) => {
       res.status(500).send('Internal server error occured.');
+      console.log('Failed to retrieved restaurants. ' + err)
     });
 });
 
