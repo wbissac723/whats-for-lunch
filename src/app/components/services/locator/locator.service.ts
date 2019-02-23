@@ -10,12 +10,9 @@ import { SearchParams } from './search-params/search-params.model';
     providedIn: 'root'
 })
 export class LocatorService {
-    private appEnvironment: boolean = environment.production;
-    private url: string;
+    private url = 'https://meal-vote-api.herokuapp.com/api/restaurants';
 
-    constructor(private http: HttpClient) {
-        this.url = (this.appEnvironment) ? 'productionURL' : '/api/restaurants/';
-    }
+    constructor(private http: HttpClient) {}
 
     getRestaurants(search: SearchParams): Observable<any> {
         const endpoint = 'https://api.yelp.com/v3/businesses/search?location=';
