@@ -2,6 +2,8 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const _ = require('lodash');
+
 
 // Initialize the router
 const router = express.Router();
@@ -54,10 +56,13 @@ function saveUser(user, res) {
   user.save()
     .then(() => {
       console.log(`Successfully created user ${user.userName}.`)
+
+      const userDetails = _.pick(user,['userName', 'email', 'tribe']);
+
       return res.status(201)
         .json({
           message: 'Successfully created user.',
-          createdUser: user
+          createdUser: userDetails
         });
     })
     .catch((err) => {
