@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 module.exports = function () {
-  const db = 'mongodb+srv://mealvoteadmin2381:KeysToTheKingdom@meal-vote-jiwmk.mongodb.net/test?retryWrites=true';
+  const db = 'mongodb://AngularDev80:onelinecoder23@ds139295.mlab.com:39295/meal-vote';
 
-
-  console.log('Connecting to MongoDB.');
+  console.log('Connecting to database.');
 
   mongoose.connect(db, {
     useCreateIndex: true,
