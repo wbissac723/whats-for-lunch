@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { LoginService } from 'src/app/components/login/services/login.service';
+import { DataStoreService } from 'src/app/store/data-store.service';
 import { TribeService } from '../../../services/tribe-service/tribe.service';
 
 @Component({
@@ -12,18 +12,22 @@ import { TribeService } from '../../../services/tribe-service/tribe.service';
 export class NewAccountComponent implements OnInit {
   userName: string;
   tribeCreated: boolean;
+
+  createdTribe = [];
+
   form: FormGroup;
 
   constructor(
     private tribeService: TribeService,
-    private login: LoginService
+    private store: DataStoreService
     ) { }
 
     get tribename() {
       return this.form.get('tribename');
     }
+
     ngOnInit() {
-      this.userName = this.login.userName;
+      this.userName = this.store.userName;
       this.form = new FormGroup({ tribename: new FormControl('', Validators.required) });
   }
 
@@ -32,9 +36,13 @@ export class NewAccountComponent implements OnInit {
       .subscribe(
         (tribe) => {
         this.tribeCreated = true;
+        this.createdTribe.push(tribe);
+        this.store.createdTribe.push(tribe);
+
         console.log('tribe is created' + JSON.stringify(tribe, null, 3));
       }, (err) => {
         this.tribeCreated = false;
+
         console.log('Tribe creation failed. ' + JSON.stringify(err, null, 3));
     });
   }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from './services/login.service';
 import { AccountService, UserDetails } from '../services/account-service/account.service';
+import { DataStoreService } from 'src/app/store/data-store.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,6 @@ import { AccountService, UserDetails } from '../services/account-service/account
 export class LoginComponent implements OnInit, OnDestroy {
 
   public isLoading: boolean;
-  public userSaved: boolean;
 
   public user: UserDetails = new UserDetails();
 
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private login: LoginService,
     private accountService: AccountService,
-    private zone: NgZone
+    private zone: NgZone,
+    private store: DataStoreService
   ) { }
 
   ngOnInit() { }
@@ -45,12 +46,12 @@ export class LoginComponent implements OnInit, OnDestroy {
      this.accountService.createUser(this.user)
       .subscribe(
         (user) => {
-          this.userSaved = true;
+          this.store.userStoredInDB = true;
           this.isLoading = false;
           this.navigateToUserPage();
       },
         (err) => {
-          this.userSaved = false;
+          this.store.userStoredInDB = false;
           this.isLoading = false;
           console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
       });
