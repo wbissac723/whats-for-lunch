@@ -14,8 +14,8 @@ export class TribeService {
     createTribe(tribe: Tribe): Observable<any> {
         const body = {
             tribeName: tribe.tribeName,
-            tribeCreator: tribe.tribeCreator,
-            tribeMemeber: tribe.tribeMember
+            tribeCreator: this.login.userName,
+            tribeMemeber: this.login.userName
         };
 
         return this.http.post(this.url, body);
