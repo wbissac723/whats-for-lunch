@@ -15,7 +15,7 @@ export class TribeService {
         const body = {
             tribeName: tribeName,
             tribeCreator: this.login.userName,
-            tribeMemeber: this.login.userName
+            tribeMember: this.login.userName
         };
 
         return this.http.post(this.url, body);
