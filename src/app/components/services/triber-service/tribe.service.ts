@@ -11,9 +11,9 @@ export class TribeService {
 
     constructor(private http: HttpClient, private login: LoginService) {}
 
-    createTribe(tribe: Tribe): Observable<any> {
+    createTribe(tribeName: string): Observable<any> {
         const body = {
-            tribeName: tribe.tribeName,
+            tribeName: tribeName,
             tribeCreator: this.login.userName,
             tribeMemeber: this.login.userName
         };
@@ -22,8 +22,3 @@ export class TribeService {
     }
 }
 
-export class Tribe {
-    tribeName: string;
-    tribeMember: string;
-    tribeCreator: string;
-}
