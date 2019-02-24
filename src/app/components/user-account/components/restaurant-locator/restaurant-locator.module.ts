@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserHubComponent } from './user-hub.component';
+import { RestaurantLocatorComponent } from './restaurant-locator.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -8,8 +8,8 @@ import { FoodLocatorInterceptor } from '../../../interceptors/food-locator.inter
 import { RestaurantModule } from '../../../restaurant/restaurant.module';
 
 @NgModule({
-  declarations: [UserHubComponent],
-  exports: [UserHubComponent],
+  declarations: [RestaurantLocatorComponent],
+  exports: [RestaurantLocatorComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -19,4 +19,4 @@ import { RestaurantModule } from '../../../restaurant/restaurant.module';
     { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true }
   ]
 })
-export class UserHubModule { }
+export class RestaurantLocatorModule { }

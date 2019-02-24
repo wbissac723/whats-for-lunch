@@ -4,12 +4,13 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { LocatorService } from '../../../services/locator/locator.service';
 import { SearchParams } from 'src/app/components/services/locator/search-params/search-params.model';
 import { Restaurant, Address } from 'src/app/components/models/restaurant.model';
+
 @Component({
-  selector: 'app-user-hub',
-  templateUrl: './user-hub.component.html',
-  styleUrls: ['./user-hub.component.scss']
+  selector: 'app-restaurant-locator',
+  templateUrl: './restaurant-locator.component.html',
+  styleUrls: ['./restaurant-locator.component.scss']
 })
-export class UserHubComponent implements OnInit {
+export class RestaurantLocatorComponent implements OnInit {
 
   searchForm: FormGroup;
   searchQuery: SearchParams = new SearchParams();
@@ -39,7 +40,7 @@ export class UserHubComponent implements OnInit {
   buildSearchForm() {
     this.searchForm = this.fb.group({
       location: ['', Validators.required],
-      zipCode:[''],
+      zipCode: [''],
       category: ['', Validators.required]
     });
   }

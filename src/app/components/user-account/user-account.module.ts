@@ -2,14 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Feature Modules
-import { UserHubModule } from './components/user-hub/user-hub.module';
 import { UserNavbarModule } from '../user-navbar/user-navbar.module';
 
 // Components
 import { UserAccountComponent } from './user-account.component';
 import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
-import { RestaurantModule } from '../restaurant/restaurant.module';
+
+// Feature Modules
 import { NewAccountModule } from './components/new-account/new-account.module';
+import { RestaurantLocatorModule } from './components/restaurant-locator/restaurant-locator.module';
+import { RestaurantModule } from '../restaurant/restaurant.module';
+
+
 
 @NgModule({
   declarations: [
@@ -23,7 +27,7 @@ import { NewAccountModule } from './components/new-account/new-account.module';
   imports: [
     CommonModule,
     UserNavbarModule,
-    UserHubModule,
+    RestaurantLocatorModule,
     RestaurantModule,
     NewAccountModule
   ]
