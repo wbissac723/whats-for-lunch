@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { NgZone } from '@angular/core';
+import { AccountService, UserDetails } from '../../services/account-service/account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +22,22 @@ export class LoginService {
     private firebase: AngularFireAuth,
     private router: Router,
     private zone: NgZone,
+    private accountService: AccountService
   ) { }
 
   loginWithGoogle() {
     this.firebase.auth.signInWithPopup(new auth.GoogleAuthProvider)
-      .then((data) => {    // TODO convert promise to an observable
+      .then((data) => {
         this._authenticated = true;
         this.userName = data.user.displayName;
         this.userEmail = data.user.email;
+
+        // Store user in database
+        const user = new UserDetails();
+        user.userName = this.userName;
+        user.userEmail = this.userEmail;
+
+        this.accountService.createUser(user).subscribe();
 
         this.zone.run(() => {
           this.router.navigate(['/user/' + this.userName]);
