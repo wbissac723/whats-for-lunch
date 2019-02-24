@@ -17,15 +17,14 @@ export class NewAccountComponent implements OnInit {
   constructor(
     private tribeService: TribeService,
     private login: LoginService
-    ) {
-    this.userName = this.login.userName;
-  }
+    ) { }
 
-  get tribename() {
-    return this.form.get('tribename');
-  }
-  ngOnInit() {
-    this.form = new FormGroup({ tribename: new FormControl('', Validators.required) });
+    get tribename() {
+      return this.form.get('tribename');
+    }
+    ngOnInit() {
+      this.userName = this.login.userName;
+      this.form = new FormGroup({ tribename: new FormControl('', Validators.required) });
   }
 
   createTribe() {

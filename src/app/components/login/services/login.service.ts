@@ -1,47 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
-import { NgZone } from '@angular/core';
-import { AccountService, UserDetails } from '../../services/account-service/account.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class LoginService {
-  public userName;
-  public userEmail;
+
+  public userName: string;
+  public userEmail: string;
   private _authenticated: boolean;
 
   get authenticated(): boolean {
     return this._authenticated;
   }
 
-  constructor(
-    private firebase: AngularFireAuth,
-    private router: Router,
-    private zone: NgZone,
-    private accountService: AccountService
-  ) { }
+  constructor(private firebase: AngularFireAuth) { }
 
   loginWithGoogle() {
-    this.firebase.auth.signInWithPopup(new auth.GoogleAuthProvider)
+    return this.firebase.auth.signInWithPopup(new auth.GoogleAuthProvider)
       .then((data) => {
         this._authenticated = true;
+
         this.userName = data.user.displayName;
         this.userEmail = data.user.email;
-
-        // Store user in database
-        const user = new UserDetails();
-        user.userName = this.userName;
-        user.userEmail = this.userEmail;
-
-        this.accountService.createUser(user).subscribe();
-
-        this.zone.run(() => {
-          this.router.navigate(['/user/' + this.userName]);
-        });
+      })
+      .catch((err) => {
+        this._authenticated = false;
+        console.log('Google Authentication failed. ' + JSON.stringify(err, null, 2));
       });
   }
 
