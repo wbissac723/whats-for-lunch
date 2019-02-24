@@ -10,7 +10,7 @@ import { SearchParams } from './search-params/search-params.model';
     providedIn: 'root'
 })
 export class LocatorService {
-    private url = 'https://meal-vote-api.herokuapp.com/api/restaurants';
+    private url = 'https://meal-vote-api-2.herokuapp.com/api/restaurants';
 
     constructor(private http: HttpClient) {}
 
