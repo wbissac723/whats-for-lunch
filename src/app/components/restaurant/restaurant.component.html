@@ -20,11 +20,12 @@
 <div *ngIf="currentRestaurant">
   <app-modal [modalHeading]="currentRestaurant.name">
     <ng-container class="body">
-      <!-- <label for="isClosed"> Opne Now? : </label> &nbsp;
-      <div id="isClosed" style="display:inline-block;" *ngIf="currentRestaurant.isClosed; else #no">
-        <span>Yes</span>
+      <label for="isClosed"> <b>Open Now? :</b> </label> &nbsp;
+      <div id="isClosed" style="display:inline-block;" >
+        <span *ngIf="currentRestaurant.isClosed">No</span>
+        <span *ngIf="!currentRestaurant.isClosed">Yes</span>
+        <!-- <ng-template #nothing><span>No</span></ng-template> -->
       </div>
-      <ng-template #no><span>No</span></ng-template> -->
       <div>
         <label for="phoneNumber">
           <b>Phone:</b>
