@@ -20,14 +20,16 @@ export class NewAccountComponent implements OnInit {
   constructor(
     private tribeService: TribeService,
     private store: DataStoreService
-    ) { }
+    ) {
+      this.userName = this.store.userName;
+
+    }
 
     get tribename() {
       return this.form.get('tribename');
     }
 
     ngOnInit() {
-      this.userName = this.store.userName;
       this.form = new FormGroup({ tribename: new FormControl('', Validators.required) });
   }
 

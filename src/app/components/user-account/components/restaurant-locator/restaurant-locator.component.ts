@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
-import { LocatorService } from '../../../services/locator/locator.service';
-import { SearchParams } from 'src/app/components/services/locator/search-params/search-params.model';
-import { Restaurant, Address } from 'src/app/components/models/restaurant.model';
+// Services
+import { LocatorService } from 'src/app/components/services/locator-service/locator.service';
+
+// Models
+import { Address, Restaurant } from 'src/app/components/models/restaurant.model';
+import { SearchParams } from 'src/app/components/services/locator-service/search-params/search-params.model';
 
 @Component({
   selector: 'app-restaurant-locator',

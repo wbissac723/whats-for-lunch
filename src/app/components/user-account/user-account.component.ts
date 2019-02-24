@@ -1,8 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 // Services
-import { LoginService } from '../login/services/login.service';
+import { DataStoreService } from 'src/app/store/data-store.service';
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -14,11 +13,8 @@ export class UserAccountComponent implements OnInit {
   public username: string;
   public tribeMember: boolean;
 
-  constructor(
-    private route: ActivatedRoute,
-    private loginService: LoginService
-    ) {
-      this.username = this.loginService.userName;
+  constructor(private store: DataStoreService) {
+      this.username = this.store.userName;
     }
 
   ngOnInit() {

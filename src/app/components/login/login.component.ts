@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   storeUserInDB() {
-     this.user.userName = this.login.userName;
-     this.user.userEmail = this.login.userEmail;
+     this.user.userName = this.store.userName;
+     this.user.userEmail = this.store.userEmail;
 
      this.accountService.createUser(this.user)
       .subscribe(
