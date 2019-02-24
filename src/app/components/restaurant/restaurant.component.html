@@ -1,6 +1,6 @@
-<div class="card mx-auto" style="Width:50%;"  *ngFor="let restaurant of restaurants">
+<div class="card mx-auto" style="Width:50%;" *ngFor="let restaurant of restaurants;index as i">
   <div class="row">
-    <div class="col-4" >
+    <div class="col-4">
       <div style="width: 100%" class=" card-header ">
         <img style='object-fit: contain' class="card-img-top img-fluid" src='{{ restaurant.imgURL }}' alt="Card image cap">
       </div>
@@ -10,31 +10,53 @@
         <h5 class="card-title">{{ restaurant.name }}</h5>
         <p class="card-text">{{ restaurant.location?.line1 }}</p>
         <p class="card-text">{{ restaurant.location?.line2 }}</p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary" (click)="extractRestaurantDetails(i)" data-toggle="modal" data-target="#commonModal">
           Show Details
         </button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+<div *ngIf="currentRestaurant">
+  <app-modal [modalHeading]="currentRestaurant.name">
+    <ng-container class="body">
+      <!-- <label for="isClosed"> Opne Now? : </label> &nbsp;
+      <div id="isClosed" style="display:inline-block;" *ngIf="currentRestaurant.isClosed; else #no">
+        <span>Yes</span>
+      </div>
+      <ng-template #no><span>No</span></ng-template> -->
+      <div>
+        <label for="phoneNumber">
+          <b>Phone:</b>
+        </label> &nbsp;
+        <div id="phoneNumber" style="display:inline-block;">
+          {{currentRestaurant.phoneNumber}}
         </div>
       </div>
-    </div>
-  </div>
+      <div>
+        <label for="rating">
+          <b>Rating:</b>
+        </label> &nbsp;
+        <div id="rating" style="display:inline-block;">
+          {{currentRestaurant.rating}}
+        </div>
+      </div>
+      <div>
+        <label for="name">
+          <b>Hours:</b>
+        </label> &nbsp;
+        <div id="name" style="display:inline-block;">
+          {{currentRestaurant.hoursOfOperation}}
+        </div>
+      </div>
+      <div>
+        <label for="website">
+          <b>Website:</b>
+        </label> &nbsp;
+        <div id="website" style="display:inline-block;">
+          {{currentRestaurant.website}}
+        </div>
+      </div>
+    </ng-container>
+  </app-modal>
+</div>
