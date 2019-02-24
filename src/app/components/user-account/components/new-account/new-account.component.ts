@@ -12,6 +12,7 @@ import { TribeService } from '../../../services/tribe-service/tribe.service';
 export class NewAccountComponent implements OnInit {
   userName: string;
   tribeCreated: boolean;
+  tribeCreatedMessage: string;
 
   createdTribe = [];
 
@@ -37,9 +38,11 @@ export class NewAccountComponent implements OnInit {
     this.tribeService.createTribe(this.tribename.value)
       .subscribe(
         (tribe) => {
-        this.tribeCreated = true;
-        this.createdTribe.push(tribe);
-        this.store.createdTribe.push(tribe);
+          this.createdTribe.push(tribe);
+          this.store.createdTribe.push(tribe);
+
+          this.tribeCreated = true;
+          this.tribeCreatedMessage = `You just created ${tribe.tribeName}`;
 
         console.log('tribe is created' + JSON.stringify(tribe, null, 3));
       }, (err) => {
