@@ -1,8 +1,11 @@
 <!-- Shows spinner while loading -->
 <section *ngIf="isLoading">
-  ...Loading account details
+    <div class="text-center">
+        <div class="spinner-border" style="width: 8rem; height: 8rem;" role="status">
+          <span class="sr-only">  ...Loading account details</span>
+        </div>
+      </div>
 </section>
-
 
 <section *ngIf="!isLoading" id="loginSection" class="text-center">
 
