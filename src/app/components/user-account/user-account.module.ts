@@ -9,9 +9,9 @@ import { UserAccountComponent } from './user-account.component';
 import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
 
 // Feature Modules
-import { NewAccountModule } from './components/new-account/new-account.module';
 import { RestaurantLocatorModule } from './components/restaurant-locator/restaurant-locator.module';
 import { RestaurantModule } from '../restaurant/restaurant.module';
+import { TribeModule } from './components/tribe/tribe.module';
 
 
 
@@ -29,7 +29,7 @@ import { RestaurantModule } from '../restaurant/restaurant.module';
     UserNavbarModule,
     RestaurantLocatorModule,
     RestaurantModule,
-    NewAccountModule
+    TribeModule
   ]
 })
 export class UserAccountModule { }

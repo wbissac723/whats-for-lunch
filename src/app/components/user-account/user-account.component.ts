@@ -14,11 +14,16 @@ export class UserAccountComponent implements OnInit {
   public tribeMember: boolean;
 
   constructor(private store: DataStoreService) {
-      this.username = this.store.userName;
-    }
+    this.username = this.store.userName;
 
-  ngOnInit() {
-    this.tribeMember = true;
+    // Gets user name from local storage when page is refreshed
+    if (!this.username) {
+      this.store.userName = localStorage.getItem('mealVoteUserName');
   }
-}
 
+
+    this.tribeMember = this.store.tribeMember;
+  }
+
+  ngOnInit() { }
+}

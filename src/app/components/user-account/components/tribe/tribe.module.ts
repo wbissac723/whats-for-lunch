@@ -1,14 +1,14 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewAccountComponent } from './new-account.component';
+import { TribeComponent } from './tribe.component';
 
 @NgModule({
-  declarations: [NewAccountComponent],
-  exports: [NewAccountComponent],
+  declarations: [TribeComponent],
+  exports: [TribeComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ]
 })
-export class NewAccountModule { }
+export class TribeModule { }
