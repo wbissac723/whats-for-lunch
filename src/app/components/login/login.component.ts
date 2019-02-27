@@ -34,39 +34,40 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.login.loginWithGoogle()
       .then(() => {
         this.searchForUserProfile();
-
-        // this.storeUserInDB();
       })
       .catch((err) => {
-        console.log('Error ' + JSON.stringify(err, null, 3));
-
+        console.log('Error with Google auth login.' + JSON.stringify(err, null, 3));
         this.isLoading = false;
       });
   }
 
   searchForUserProfile() {
+    console.log('Checking database for existing profile.');
+
     return this.accountService.findUser(this.store.userEmail)
       .subscribe(
         (user) => {
 
-          // Check if email property exists
+          // Check if email property exists on response object
           if (!user.email) {
-            console.log('User is not found in database.');
+            console.log('User is not found.');
 
+            // Store user in database
             return this.storeUserInDB();
           }
+
+          // Add existing profile from database into StoreService
           this.store.profile = user;
-
-          console.log('User exists in database. ' + JSON.stringify(user, null, 2));
+          this.isLoading = false;
+          console.log('User found in database. ' + JSON.stringify(user, null, 2));
         }, (err) => {
-
+          console.log('Error occurred searching database for profile. ' + JSON.stringify(err, null, 2));
+          this.isLoading = false;
         });
-
   }
 
   storeUserInDB() {
     console.log('Storing user in database');
-
     this.user.userName = this.store.userName;
     this.user.userEmail = this.store.userEmail;
     this.cacheDataLocally();
@@ -74,22 +75,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.accountService.createUser(this.user)
       .subscribe(
         (user) => {
-          console.log('User successful store in database.');
-
           this.store.userStoredInDB = true;
           this.isLoading = false;
           this.navigateToUserPage();
+          console.log('User successful store in database.');
         },
         (err) => {
           this.store.userStoredInDB = false;
           this.isLoading = false;
-
           console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
         });
   }
 
   cacheDataLocally() {
     localStorage.setItem('mealVoteUserName', this.user.userName);
+    localStorage.setItem('mealVoteUserEmail', this.user.userEmail);
   }
 
   loginWithFacebook() {
