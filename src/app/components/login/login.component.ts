@@ -16,8 +16,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public isLoading: boolean;
 
-  public user: UserDetails = new UserDetails();
-
   constructor(
     private router: Router,
     private login: LoginService,
@@ -47,7 +45,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.accountService.findUser(this.store.userEmail)
       .subscribe(
         (user) => {
-
           // Check if email property exists on response object
           if (!user.email) {
             console.log('User is not found.');
@@ -59,6 +56,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           // Add existing profile from database into StoreService
           this.store.profile = user;
           this.isLoading = false;
+          this.navigateToUserPage();
+
           console.log('User found in database. ' + JSON.stringify(user, null, 2));
         }, (err) => {
           console.log('Error occurred searching database for profile. ' + JSON.stringify(err, null, 2));
@@ -68,11 +67,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   storeUserInDB() {
     console.log('Storing user in database');
-    this.user.userName = this.store.userName;
-    this.user.userEmail = this.store.userEmail;
-    this.cacheDataLocally();
 
-    this.accountService.createUser(this.user)
+    this.accountService.createUser(this.store.userName, this.store.userEmail)
       .subscribe(
         (user) => {
           this.store.userStoredInDB = true;
@@ -84,12 +80,15 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.store.userStoredInDB = false;
           this.isLoading = false;
           console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
+        },
+        () => {
+          this.cacheDataLocally();
         });
   }
 
   cacheDataLocally() {
-    localStorage.setItem('mealVoteUserName', this.user.userName);
-    localStorage.setItem('mealVoteUserEmail', this.user.userEmail);
+    localStorage.setItem('mealVoteUserName', this.store.userName);
+    localStorage.setItem('mealVoteUserEmail', this.store.userEmail);
   }
 
   loginWithFacebook() {
@@ -98,7 +97,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   navigateToUserPage() {
     this.zone.run(() => {
-      this.router.navigate(['/user/' + this.user.userName]);
+      this.router.navigate(['/user/' + this.store.userName]);
     });
   }
 

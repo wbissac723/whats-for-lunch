@@ -33,8 +33,6 @@ export class LoginService {
       });
   }
 
-
-  
   // TODO implementation not complete
   loginWithFacebook() {
     this.firebase.auth.signInWithPopup(new auth.FacebookAuthProvider)

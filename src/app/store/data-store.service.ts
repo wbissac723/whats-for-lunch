@@ -8,7 +8,7 @@ export class DataStoreService {
   userEmail: string;
 
   userStoredInDB: boolean;
-  tribeMember = false;
+  tribeMember: boolean;
 
   createdTribe: string[] = [];
 
