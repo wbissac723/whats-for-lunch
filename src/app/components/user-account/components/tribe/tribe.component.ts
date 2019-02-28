@@ -19,7 +19,7 @@ export class TribeComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private account: AccountService
+    private account: AccountService,
     private store: DataStoreService
   ) {
     this.userName = this.store.userName;
