@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { UserProfile } from '../../user-account/models/user-profile.model';
 
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AccountService {
     private baseUrl = 'https://meal-vote-api-2.herokuapp.com/api/users';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     createUser(userName: string, email: string): Observable<any> {
         const body = { userName, email };
@@ -24,9 +23,13 @@ export class AccountService {
     }
 
     createTribe(email: string, tribeName: string): Observable<any> {
-        const body = { email, tribeName };
+        const body = {
+            email,
+            tribeName: [
+                { name: tribeName }
+            ]
+        };
 
-        return this.http.put(this.baseUrl, body);
+        return this.http.patch(this.baseUrl, body);
     }
 }
-

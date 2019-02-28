@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { DataStoreService } from 'src/app/store/data-store.service';
-import { TribeService } from '../../../services/tribe-service/tribe.service';
+import { AccountService } from 'src/app/components/services/account-service/account.service';
 
 @Component({
   selector: 'app-tribe',
@@ -19,23 +19,23 @@ export class TribeComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private tribeService: TribeService,
+    private account: AccountService
     private store: DataStoreService
-    ) {
-      this.userName = this.store.userName;
+  ) {
+    this.userName = this.store.userName;
 
-    }
+  }
 
-    get tribename() {
-      return this.form.get('tribename');
-    }
+  get tribename() {
+    return this.form.get('tribename');
+  }
 
-    ngOnInit() {
-      this.form = new FormGroup({ tribename: new FormControl('', Validators.required) });
+  ngOnInit() {
+    this.form = new FormGroup({ tribename: new FormControl('', Validators.required) });
   }
 
   createTribe() {
-    this.tribeService.createTribe(this.tribename.value)
+    this.account.createTribe(this.store.userEmail, this.tribename.value)
       .subscribe(
         (tribe) => {
           this.createdTribe.push(tribe);
@@ -44,11 +44,11 @@ export class TribeComponent implements OnInit {
           this.tribeCreated = true;
           this.tribeCreatedMessage = `You just created ${tribe.tribeName}`;
 
-        console.log('tribe is created' + JSON.stringify(tribe, null, 3));
-      }, (err) => {
-        this.tribeCreated = false;
+          console.log('tribe is created' + JSON.stringify(tribe, null, 3));
+        }, (err) => {
+          this.tribeCreated = false;
 
-        console.log('Tribe creation failed. ' + JSON.stringify(err, null, 3));
-    });
+          console.log('Tribe creation failed. ' + JSON.stringify(err, null, 3));
+        });
   }
 }
