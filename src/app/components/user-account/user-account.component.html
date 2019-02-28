@@ -2,7 +2,7 @@
 
 <app-tribe *ngIf="!tribeMember"></app-tribe>
 
-<app-restaurant-locator ></app-restaurant-locator>
+<app-restaurant-locator *ngIf="tribeMember" ></app-restaurant-locator>
 
   <br>
   <br>
