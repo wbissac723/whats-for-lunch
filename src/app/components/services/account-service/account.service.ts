@@ -24,7 +24,3 @@ export class AccountService {
     }
 }
 
-export class UserDetails {
-    userName: string;
-    userEmail: string;
-}

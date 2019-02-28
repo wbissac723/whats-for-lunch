@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 
 import { LoginService } from './services/login.service';
-import { AccountService, UserDetails } from '../services/account-service/account.service';
+import { AccountService } from '../services/account-service/account.service';
 import { DataStoreService } from 'src/app/store/data-store.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { DataStoreService } from 'src/app/store/data-store.service';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
   public isLoading: boolean;
 
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.store.userStoredInDB = true;
           this.isLoading = false;
           this.navigateToUserPage();
-          console.log('User successful store in database.');
+          console.log('User successful stored in database.');
         },
         (err) => {
           this.store.userStoredInDB = false;
@@ -101,6 +101,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() { }
-
 }
+

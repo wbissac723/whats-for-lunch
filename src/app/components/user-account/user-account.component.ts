@@ -31,10 +31,11 @@ export class UserAccountComponent implements OnInit {
    }
 
    checkForTribe() {
-     if (this.profile.tribe.length > 0) {
+     if (this.profile && this.profile.tribe.length > 0) {
       this.tribeMember = true;
      } else {
        this.tribeMember = false;
+       console.log('User does not currently belong to a tribe.');
      }
    }
 }
