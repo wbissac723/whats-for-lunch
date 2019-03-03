@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
 import { AccountService } from '../services/account-service/account.service';
 import { DataStoreService } from 'src/app/store/data-store.service';
+import { UserProfile } from '../user-account/models/user-profile.model';
 
 @Component({
   selector: 'app-login',
@@ -40,27 +41,23 @@ export class LoginComponent implements OnInit {
   }
 
   searchForUserProfile() {
-    console.log('Checking database for existing profile.');
+    console.log('Searching database for user.');
 
     return this.accountService.findUser(this.store.userEmail)
       .subscribe(
         (user) => {
-          // Check if email property exists on response object
-          if (!user.email) {
-            console.log('User is not found.');
-
-            // Store user in database
-            return this.storeUserInDB();
-          }
-
-          // Add existing profile from database into StoreService
+          // Check if response object has an email property
+          if (user.email) {
+            console.log('User located in database.');
+          // Cache user profile in the STORE
           this.store.profile = user;
           this.isLoading = false;
           this.navigateToUserPage();
+          }
+          console.log('User not found in database.');
 
-          console.log('User found in database. ' + JSON.stringify(user, null, 2));
         }, (err) => {
-          console.log('Error occurred searching database for profile. ' + JSON.stringify(err, null, 2));
+          console.log('Error occurred searching for user in database: ' + JSON.stringify(err, null, 2));
           this.isLoading = false;
         });
   }
@@ -68,31 +65,27 @@ export class LoginComponent implements OnInit {
   storeUserInDB() {
     console.log('Storing user in database');
 
-    this.accountService.createUser(this.store.userName, this.store.userEmail)
+    this.accountService.createUser(this.store.profile)
       .subscribe(
-        (user) => {
-          this.store.userStoredInDB = true;
+        (user: UserProfile) => {
+          this.store.profile = user;
           this.isLoading = false;
           this.navigateToUserPage();
           console.log('User successful stored in database.');
         },
         (err) => {
-          this.store.userStoredInDB = false;
           this.isLoading = false;
           console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
         },
         () => {
-          this.cacheDataLocally();
+          this.cacheUserProfile();
         });
   }
 
-  cacheDataLocally() {
+  cacheUserProfile() {
+    // TODO store the entire user profile object in local storage
     localStorage.setItem('mealVoteUserName', this.store.userName);
     localStorage.setItem('mealVoteUserEmail', this.store.userEmail);
-  }
-
-  loginWithFacebook() {
-    this.login.loginWithFacebook();
   }
 
   navigateToUserPage() {
@@ -102,4 +95,3 @@ export class LoginComponent implements OnInit {
   }
 
 }
-

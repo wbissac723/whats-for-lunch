@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { DataStoreService } from 'src/app/store/data-store.service';
 import { AccountService } from 'src/app/components/services/account-service/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tribe',
@@ -14,13 +15,12 @@ export class TribeComponent implements OnInit {
   tribeCreated: boolean;
   tribeCreatedMessage: string;
 
-  createdTribe = [];
-
   form: FormGroup;
 
   constructor(
     private account: AccountService,
-    private store: DataStoreService
+    private store: DataStoreService,
+    private router: Router
   ) {
     this.userName = this.store.userName;
 
@@ -38,11 +38,13 @@ export class TribeComponent implements OnInit {
     this.account.createTribe(this.store.userEmail, this.tribename.value)
       .subscribe(
         (tribe) => {
-          this.createdTribe.push(tribe);
           this.store.createdTribe.push(tribe);
 
+          this.store.tribeMember = true;
           this.tribeCreated = true;
           this.tribeCreatedMessage = `You just created ${tribe.tribeName}`;
+          this.router.navigate(['/user/' + this.store.userName]);
+
 
           console.log('tribe is created' + JSON.stringify(tribe, null, 3));
         }, (err) => {

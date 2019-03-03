@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 // Services
 import { DataStoreService } from 'src/app/store/data-store.service';
 import { UserProfile } from './models/user-profile.model';
-import { Profile } from 'selenium-webdriver/firefox';
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -19,6 +18,7 @@ export class UserAccountComponent implements OnInit {
   constructor(private store: DataStoreService) {
     this.username = this.store.userName;
     this.profile = this.store.profile;
+    this.tribeMember = this.store.tribeMember;
 
     // Gets user name from local storage when page is refreshed
     if (!this.username) {

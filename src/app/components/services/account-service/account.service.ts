@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { UserProfile } from '../../user-account/models/user-profile.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -10,26 +11,18 @@ export class AccountService {
 
     constructor(private http: HttpClient) { }
 
-    createUser(userName: string, email: string): Observable<any> {
-        const body = { userName, email };
+    createUser(profile: UserProfile): Observable<UserProfile> {
 
-        return this.http.post(this.baseUrl, body);
+        return this.http.post<UserProfile>(this.baseUrl, profile);
     }
 
-    findUser(email: string): Observable<any> {
-        const body = { email };
+    findUser(email: string): Observable<UserProfile> {
 
-        return this.http.post(`${this.baseUrl}/profile`, body);
+        return this.http.post<UserProfile>(`${this.baseUrl}/profile`, email);
     }
 
-    createTribe(email: string, tribeName: string): Observable<any> {
-        const body = {
-            email,
-            tribeName: [
-                { name: tribeName }
-            ]
-        };
+    updateProfile(profile: UserProfile ): Observable<any> {
 
-        return this.http.patch(this.baseUrl, body);
+        return this.http.patch<UserProfile>(this.baseUrl, profile);
     }
 }
