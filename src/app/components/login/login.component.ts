@@ -62,25 +62,6 @@ export class LoginComponent implements OnInit {
         });
   }
 
-  storeUserInDB() {
-    console.log('Storing user in database');
-
-    this.accountService.createUser(this.store.profile)
-      .subscribe(
-        (user: UserProfile) => {
-          this.store.profile = user;
-          this.isLoading = false;
-          this.navigateToUserPage();
-          console.log('User successful stored in database.');
-        },
-        (err) => {
-          this.isLoading = false;
-          console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
-        },
-        () => {
-          this.cacheUserProfile();
-        });
-  }
 
   cacheUserProfile() {
     // TODO store the entire user profile object in local storage
