@@ -25,6 +25,9 @@ export class TribeComponent implements OnInit {
   ) {
     this.userName = this.store.userName;
 
+    if (!this.store.profile) {
+      this.store.profile = JSON.parse(localStorage.getItem('cachedProfile'));
+    }
   }
 
   get tribeName() {
@@ -47,13 +50,12 @@ export class TribeComponent implements OnInit {
     this.account.createUser(user)
       .subscribe(
         (profile) => {
-
           this.store.tribeMember = true;
           this.tribeCreated = true;
           this.tribeCreatedMessage = `You just created a tribe.`;
           this.store.profile = profile;
 
-          console.log('User successful updated profile in data.');
+          console.log('User successful updated profile in database.');
           console.log(JSON.stringify(user, null, 3));
 
           this.router.navigate(['/user/' + this.store.userName]);

@@ -64,15 +64,14 @@ export class LoginComponent implements OnInit {
 
 
   cacheUserProfileInLocalStore(profile?: UserProfile) {
-    // TODO store the entire user profile object in local storage
     if (!_.isEmpty(profile)) {
       localStorage.setItem('cachedProfile', JSON.stringify(profile));
-    }
-    else {
+    } else {
       const userDetails = {
         'userName': this.store.userName,
         'userEmail': this.store.userEmail
-      }
+      };
+
       localStorage.setItem('cachedUserDetails', JSON.stringify(userDetails));
     }
   }
