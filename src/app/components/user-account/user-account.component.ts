@@ -15,8 +15,8 @@ export class UserAccountComponent implements OnInit {
   public username: string;
   public tribeMember: boolean;
   public profile: UserProfile;
-  public cachedProfile:UserProfile;
-  public cachedUserDetails:any; 
+  public cachedProfile: UserProfile;
+  public cachedUserDetails: any;
 
   constructor(private store: DataStoreService) {
     this.username = this.store.userName;
@@ -25,23 +25,29 @@ export class UserAccountComponent implements OnInit {
 
     // Gets user name from local storage when page is refreshed
     if (!this.username) {
-      this.cachedProfile = JSON.parse(localStorage.getItem('cachedProfile')); 
+      this.cachedProfile = JSON.parse(localStorage.getItem('cachedProfile'));
       this.cachedUserDetails = JSON.parse(localStorage.getItem('cachedUserDetails'));
 
-      (!_.isEmpty(this.cachedProfile))? this.store.userName = this.cachedProfile.userName : this.store.userName = this.cachedUserDetails.userName;
+      if (!_.isEmpty(this.cachedProfile)) {
+        this.store.userName = this.cachedProfile.userName;
+        this.store.userEmail = this.cachedProfile.email;
+      } else {
+        this.store.userName = this.cachedUserDetails.userName;
+        this.store.userEmail = this.cachedUserDetails.userEmail;
+      }
     }
   }
 
   ngOnInit() {
     this.checkForTribe();
-   }
+  }
 
-   checkForTribe() {
-     if (this.profile && this.profile.tribe.length > 0) {
+  checkForTribe() {
+    if (this.profile && this.profile.tribe.length > 0) {
       this.tribeMember = true;
-     } else {
-       this.tribeMember = false;
-       console.log('User does not currently belong to a tribe.');
-     }
-   }
+    } else {
+      this.tribeMember = false;
+      console.log('User does not currently belong to a tribe.');
+    }
+  }
 }

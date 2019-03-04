@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
     else {
       const userDetails = {
         'userName': this.store.userName,
-        'email': this.store.userEmail
+        'userEmail': this.store.userEmail
       }
       localStorage.setItem('cachedUserDetails', JSON.stringify(userDetails));
     }
