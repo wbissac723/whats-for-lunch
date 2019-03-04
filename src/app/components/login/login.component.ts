@@ -6,6 +6,7 @@ import { LoginService } from './services/login.service';
 import { AccountService } from '../services/account-service/account.service';
 import { DataStoreService } from 'src/app/store/data-store.service';
 import { UserProfile } from '../user-account/models/user-profile.model';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-login',
@@ -49,13 +50,12 @@ export class LoginComponent implements OnInit {
           // Check if response object has an email property
           if (user.email) {
             console.log('User located in database.');
-          // Cache user profile in the STORE
-          this.store.profile = user;
-          this.isLoading = false;
-          this.navigateToUserPage();
+            this.store.profile = user;
+            this.isLoading = false;
           }
           console.log('User not found in database.');
-
+          this.cacheUserProfileInLocalStore(user);
+          this.navigateToUserPage();
         }, (err) => {
           console.log('Error occurred searching for user in database: ' + JSON.stringify(err, null, 2));
           this.isLoading = false;
@@ -63,10 +63,18 @@ export class LoginComponent implements OnInit {
   }
 
 
-  cacheUserProfile() {
+  cacheUserProfileInLocalStore(profile?: UserProfile) {
     // TODO store the entire user profile object in local storage
-    localStorage.setItem('mealVoteUserName', this.store.userName);
-    localStorage.setItem('mealVoteUserEmail', this.store.userEmail);
+    if (!_.isEmpty(profile)) {
+      localStorage.setItem('cachedProfile', JSON.stringify(profile));
+    }
+    else {
+      const userDetails = {
+        'userName': this.store.userName,
+        'userEmail': this.store.userEmail
+      }
+      localStorage.setItem('cachedUserDetails', JSON.stringify(userDetails));
+    }
   }
 
   navigateToUserPage() {
