@@ -52,10 +52,9 @@ export class LoginComponent implements OnInit {
           // Cache user profile in the STORE
           this.store.profile = user;
           this.isLoading = false;
-          this.navigateToUserPage();
           }
           console.log('User not found in database.');
-
+          this.navigateToUserPage();
         }, (err) => {
           console.log('Error occurred searching for user in database: ' + JSON.stringify(err, null, 2));
           this.isLoading = false;
