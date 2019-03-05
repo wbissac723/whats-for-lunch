@@ -6,6 +6,8 @@ import { AccountService } from 'src/app/components/services/account-service/acco
 import { Router } from '@angular/router';
 import { UserProfile, Tribe } from '../../models/user-profile.model';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-tribe',
   templateUrl: './tribe.component.html',
@@ -24,10 +26,6 @@ export class TribeComponent implements OnInit {
     private router: Router
   ) {
     this.userName = this.store.userName;
-
-    if (!this.store.profile) {
-      this.store.profile = JSON.parse(localStorage.getItem('cachedProfile'));
-    }
   }
 
   get tribeName() {
@@ -53,6 +51,7 @@ export class TribeComponent implements OnInit {
           this.store.tribeMember = true;
           this.tribeCreated = true;
           this.tribeCreatedMessage = `You just created a tribe.`;
+          this.storeUserProfile(profile);
           this.store.profile = profile;
 
           console.log('User successful updated profile in database.');
@@ -63,6 +62,20 @@ export class TribeComponent implements OnInit {
           this.tribeCreated = false;
           console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
         });
+  }
+
+  storeUserProfile(profile: UserProfile) {
+      if (!_.isEmpty(profile)) {
+        console.log('tribeComponent----> storing profile in local storage');
+        localStorage.setItem('cachedProfile', JSON.stringify(profile));
+      } else {
+        const userDetails = {
+          'userName': this.store.userName,
+          'userEmail': this.store.userEmail
+        };
+
+        localStorage.setItem('cachedUserDetails', JSON.stringify(userDetails));
+      }
   }
 
 }

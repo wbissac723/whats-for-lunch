@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
 
   cacheUserProfileInLocalStore(profile?: UserProfile) {
     if (!_.isEmpty(profile)) {
+      console.log('loginComponent----> storing profile in localStorage');
       localStorage.setItem('cachedProfile', JSON.stringify(profile));
     } else {
       const userDetails = {

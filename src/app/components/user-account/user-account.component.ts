@@ -43,7 +43,7 @@ export class UserAccountComponent implements OnInit {
   }
 
   checkForTribe() {
-    if (this.profile && this.profile.tribe.length > 0) {
+    if (this.store.profile && this.store.profile.tribe.length > 0) {
       this.tribeMember = true;
     } else {
       this.tribeMember = false;
