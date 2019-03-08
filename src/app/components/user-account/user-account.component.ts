@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-
 import { DataStoreService } from 'src/app/store/data-store.service';
 import { UserProfile } from './models/user-profile.model';
-import * as _ from 'lodash';
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -24,10 +22,10 @@ export class UserAccountComponent {
       }
       console.log('Profile found in DataStore');
       this.profile = profile;
-    });
 
-    // Check if user belongs to a tribe
-    this.tribeMember = (this.profile.tribe.length > 0);
+      // Check if user belongs to a tribe
+      this.tribeMember = (this.profile.tribe.length > 0);
+    });
   }
 
 
