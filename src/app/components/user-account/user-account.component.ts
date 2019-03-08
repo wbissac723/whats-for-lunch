@@ -12,7 +12,6 @@ import * as _ from 'lodash';
 export class UserAccountComponent {
 
   public tribeMember: boolean;
-  public cachedProfile: UserProfile;
   public profile: UserProfile;
 
   constructor(private store: DataStoreService) {
@@ -33,15 +32,10 @@ export class UserAccountComponent {
 
 
   getProfileFromLocalStorage() {
-    if (!this.profile && !_.isEmpty(this.cachedProfile)) {
-      this.cachedProfile = JSON.parse(localStorage.getItem('cachedProfile'));
-      this.store.updateProfile(this.cachedProfile);
+      const cachedProfile = JSON.parse(localStorage.getItem('cachedProfile'));
+      this.store.updateProfile(cachedProfile);
 
       console.log('Successfully retrieved profile from local storage');
-    } else {
-
-      console.log('User profile was never stored in Local Storage');
-    }
   }
 
 }
