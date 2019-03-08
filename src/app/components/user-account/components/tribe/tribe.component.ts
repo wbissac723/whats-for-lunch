@@ -14,7 +14,6 @@ import * as _ from 'lodash';
   styleUrls: ['./tribe.component.scss']
 })
 export class TribeComponent implements OnInit {
-  userName: string;
   profile: UserProfile;
   tribeCreated: boolean;
   tribeCreatedMessage: string;
@@ -27,7 +26,6 @@ export class TribeComponent implements OnInit {
     private router: Router
   ) {
     this.store.profile.subscribe((profile: UserProfile) => this.profile = profile);
-    this.userName = this.profile.userName;
   }
 
   get tribeName() {

@@ -12,9 +12,8 @@ import * as _ from 'lodash';
 export class UserAccountComponent {
 
   public tribeMember: boolean;
-  public username: string;
   public cachedProfile: UserProfile;
-  public userProfile: UserProfile;
+  public profile: UserProfile;
 
   constructor(private store: DataStoreService) {
     this.store.profile.subscribe((profile: UserProfile) => {
@@ -25,17 +24,16 @@ export class UserAccountComponent {
         this.getProfileFromLocalStorage();
       }
       console.log('Profile found in DataStore');
-      this.userProfile = profile;
-      this.username = this.userProfile.userName;
+      this.profile = profile;
     });
 
     // Check if user belongs to a tribe
-    this.tribeMember = (this.userProfile.tribe.length > 0);
+    this.tribeMember = (this.profile.tribe.length > 0);
   }
 
 
   getProfileFromLocalStorage() {
-    if (!this.userProfile && !_.isEmpty(this.cachedProfile)) {
+    if (!this.profile && !_.isEmpty(this.cachedProfile)) {
       this.cachedProfile = JSON.parse(localStorage.getItem('cachedProfile'));
       this.store.updateProfile(this.cachedProfile);
 

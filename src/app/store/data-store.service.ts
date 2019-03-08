@@ -12,7 +12,6 @@ export class DataStoreService {
   updateProfile(profile: UserProfile) {
     this.profileSource.next(profile);
 
-
     // Updates profile in Local Storage
     localStorage.setItem('cachedProfile', JSON.stringify(profile));
     console.log('DataStoreService--->> Successfully stored profile in Local Storage.');
