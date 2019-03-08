@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserProfile } from '../components/user-account/models/user-profile.model';
 import { BehaviorSubject } from 'rxjs';
+import { Profile } from 'selenium-webdriver/firefox';
 
 @Injectable({ providedIn: 'root' })
 export class DataStoreService {
@@ -15,6 +16,11 @@ export class DataStoreService {
     // Updates profile in Local Storage
     localStorage.setItem('cachedProfile', JSON.stringify(profile));
     console.log('DataStoreService--->> Successfully stored profile in Local Storage.');
+  }
+
+  getProfileFromLocalStorage(): UserProfile {
+    const profile = JSON.parse(localStorage.getItem('cachedProfile'));
+    return profile;
   }
 
 }
