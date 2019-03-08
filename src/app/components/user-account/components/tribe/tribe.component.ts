@@ -15,6 +15,7 @@ import * as _ from 'lodash';
 })
 export class TribeComponent implements OnInit {
   userName: string;
+  profile: UserProfile;
   tribeCreated: boolean;
   tribeCreatedMessage: string;
 
@@ -25,7 +26,8 @@ export class TribeComponent implements OnInit {
     private store: DataStoreService,
     private router: Router
   ) {
-    this.userName = this.store.userName;
+    this.store.profile.subscribe((profile: UserProfile) => this.profile = profile);
+    this.userName = this.profile.userName;
   }
 
   get tribeName() {
@@ -38,44 +40,29 @@ export class TribeComponent implements OnInit {
 
   createTribe() {
     const user = new UserProfile();
-    user.userName = this.store.userName;
-    user.email = this.store.userEmail;
+    user.userName = this.profile.userName;
+    user.email = this.profile.email;
     user.tribe = new Array<Tribe>();
     user.tribe[0] = new Tribe();
-    user.tribe[0].creator = this.store.userName;
+    user.tribe[0].creator = this.profile.userName;
     user.tribe[0].name = this.tribeName.value;
 
     this.account.createUser(user)
       .subscribe(
         (profile) => {
-          this.store.tribeMember = true;
           this.tribeCreated = true;
           this.tribeCreatedMessage = `You just created a tribe.`;
-          this.storeUserProfile(profile);
-          this.store.profile = profile;
+          // Update the Profile in DataStore
+          this.store.updateProfile(profile);
+          // Update the profile in Local Storage
 
-          console.log('User successful updated profile in database.');
+          console.log('Successfully updated profile with new tribe.');
           console.log(JSON.stringify(user, null, 3));
 
-          this.router.navigate(['/user/' + this.store.userName]);
+          this.router.navigate(['/user/' + this.profile.userName]);
         }, (err) => {
           this.tribeCreated = false;
           console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
         });
   }
-
-  storeUserProfile(profile: UserProfile) {
-      if (!_.isEmpty(profile)) {
-        console.log('tribeComponent----> storing profile in local storage');
-        localStorage.setItem('cachedProfile', JSON.stringify(profile));
-      } else {
-        const userDetails = {
-          'userName': this.store.userName,
-          'userEmail': this.store.userEmail
-        };
-
-        localStorage.setItem('cachedUserDetails', JSON.stringify(userDetails));
-      }
-  }
-
 }

@@ -17,6 +17,7 @@ import * as _ from 'lodash';
 export class LoginComponent implements OnInit {
 
   public isLoading: boolean;
+  public userProfile: UserProfile;
 
   constructor(
     private router: Router,
@@ -26,7 +27,11 @@ export class LoginComponent implements OnInit {
     private store: DataStoreService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.store.profile.subscribe((profile: UserProfile) => {
+      this.userProfile = profile;
+    });
+  }
 
   loginWithGoogle() {
     this.isLoading = true;
@@ -44,17 +49,16 @@ export class LoginComponent implements OnInit {
   searchForUserProfile() {
     console.log('Searching database for user.');
 
-    return this.accountService.findUser(this.store.userEmail)
+    return this.accountService.findUser(this.userProfile.email)
       .subscribe(
-        (user) => {
+        (user: UserProfile) => {
           // Check if response object has an email property
           if (user.email) {
             console.log('User located in database.');
-            this.store.profile = user;
+            this.store.updateProfile(user);
             this.isLoading = false;
           }
           console.log('User not found in database.');
-          this.cacheUserProfileInLocalStore(user);
           this.navigateToUserPage();
         }, (err) => {
           console.log('Error occurred searching for user in database: ' + JSON.stringify(err, null, 2));
@@ -62,24 +66,9 @@ export class LoginComponent implements OnInit {
         });
   }
 
-
-  cacheUserProfileInLocalStore(profile?: UserProfile) {
-    if (!_.isEmpty(profile)) {
-      console.log('loginComponent----> storing profile in localStorage');
-      localStorage.setItem('cachedProfile', JSON.stringify(profile));
-    } else {
-      const userDetails = {
-        'userName': this.store.userName,
-        'userEmail': this.store.userEmail
-      };
-
-      localStorage.setItem('cachedUserDetails', JSON.stringify(userDetails));
-    }
-  }
-
   navigateToUserPage() {
     this.zone.run(() => {
-      this.router.navigate(['/user/' + this.store.userName]);
+      this.router.navigate(['/user/' + this.userProfile.userName]);
     });
   }
 

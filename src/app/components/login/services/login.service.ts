@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 
 import { DataStoreService } from 'src/app/store/data-store.service';
+import { UserProfile } from '../../user-account/models/user-profile.model';
 
 @Injectable({providedIn: 'root'})
 export class LoginService {
@@ -24,21 +25,17 @@ export class LoginService {
       .then((data) => {
         this._authenticated = true;
 
-        this.store.userName = data.user.displayName;
-        this.store.userEmail = data.user.email;
+        // Create user profile
+        const profile = new UserProfile();
+        profile.userName = data.user.displayName;
+        profile.email = data.user.email;
+
+        this.store.updateProfile(profile);
       })
       .catch((err) => {
         this._authenticated = false;
         console.log('Google Authentication failed. ' + JSON.stringify(err, null, 2));
       });
-  }
-
-  // TODO implementation not complete
-  loginWithFacebook() {
-    this.firebase.auth.signInWithPopup(new auth.FacebookAuthProvider)
-     .then((data) => {
-       console.log(JSON.stringify(data, null , 4));
-     });
   }
 
   logout() {

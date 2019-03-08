@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-// Services
 import { DataStoreService } from 'src/app/store/data-store.service';
 import { UserProfile } from './models/user-profile.model';
 import * as _ from 'lodash';
@@ -10,44 +9,41 @@ import * as _ from 'lodash';
   styleUrls: ['./user-account.component.scss']
 })
 
-export class UserAccountComponent implements OnInit {
+export class UserAccountComponent {
 
-  public username: string;
   public tribeMember: boolean;
-  public profile: UserProfile;
+  public username: string;
   public cachedProfile: UserProfile;
-  public cachedUserDetails: any;
+  public userProfile: UserProfile;
 
   constructor(private store: DataStoreService) {
-    this.username = this.store.userName;
-    this.profile = this.store.profile;
-    this.tribeMember = this.store.tribeMember;
+    this.store.profile.subscribe((profile: UserProfile) => {
 
-    // Gets user name from local storage when page is refreshed
-    if (!this.username) {
-      this.cachedProfile = JSON.parse(localStorage.getItem('cachedProfile'));
-      this.cachedUserDetails = JSON.parse(localStorage.getItem('cachedUserDetails'));
-
-      if (!_.isEmpty(this.cachedProfile)) {
-        this.store.userName = this.cachedProfile.userName;
-        this.store.userEmail = this.cachedProfile.email;
-      } else {
-        this.store.userName = this.cachedUserDetails.userName;
-        this.store.userEmail = this.cachedUserDetails.userEmail;
+      // Checking DataStore to see if profile exists. Needed for browser refresh
+      if (!profile.userName) {
+        console.log('No profile exists in DataStore.');
+        this.getProfileFromLocalStorage();
       }
-    }
+      console.log('Profile found in DataStore');
+      this.userProfile = profile;
+      this.username = this.userProfile.userName;
+    });
+
+    // Check if user belongs to a tribe
+    this.tribeMember = (this.userProfile.tribe.length > 0);
   }
 
-  ngOnInit() {
-    this.checkForTribe();
-  }
 
-  checkForTribe() {
-    if (this.store.profile && this.store.profile.tribe.length > 0) {
-      this.tribeMember = true;
+  getProfileFromLocalStorage() {
+    if (!this.userProfile && !_.isEmpty(this.cachedProfile)) {
+      this.cachedProfile = JSON.parse(localStorage.getItem('cachedProfile'));
+      this.store.updateProfile(this.cachedProfile);
+
+      console.log('Successfully retrieved profile from local storage');
     } else {
-      this.tribeMember = false;
-      console.log('User does not currently belong to a tribe.');
+
+      console.log('User profile was never stored in Local Storage');
     }
   }
+
 }
