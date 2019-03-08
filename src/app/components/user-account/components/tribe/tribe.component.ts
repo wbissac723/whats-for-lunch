@@ -25,7 +25,13 @@ export class TribeComponent implements OnInit {
     private store: DataStoreService,
     private router: Router
   ) {
-    this.store.profile.subscribe((profile: UserProfile) => this.profile = profile);
+    this.store.profile.subscribe((profile: UserProfile) => {
+      // Get profile from Local Storage when browser is refreshed
+      if (!profile.userName) {
+        this.profile = JSON.parse(localStorage.getItem('cachedProfile'));
+      }
+      this.profile = profile;
+    });
   }
 
   get tribeName() {
