@@ -23,14 +23,17 @@ export class LoginService {
   loginWithGoogle() {
     return this.firebase.auth.signInWithPopup(new auth.GoogleAuthProvider)
       .then((data) => {
-        this._authenticated = true;
 
-        // Create user profile
-        const profile = new UserProfile();
-        profile.userName = data.user.displayName;
-        profile.email = data.user.email;
+        if (data.user) {
+          this._authenticated = true;
 
-        this.store.updateProfile(profile);
+          // Create user profile
+          const profile = new UserProfile();
+          profile.userName = data.user.displayName;
+          profile.email = data.user.email;
+
+          this.store.updateProfile(profile);
+        }
       })
       .catch((err) => {
         this._authenticated = false;

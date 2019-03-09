@@ -6,7 +6,7 @@ import { LoginService } from './services/login.service';
 import { AccountService } from '../services/account-service/account.service';
 import { DataStoreService } from 'src/app/store/data-store.service';
 import { UserProfile } from '../user-account/models/user-profile.model';
-import * as _ from 'lodash';
+
 
 @Component({
   selector: 'app-login',
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.store.profile.subscribe((profile: UserProfile) => {
-      this.userProfile = profile;
+      if (profile) { this.userProfile = profile; }
     });
   }
 
@@ -37,27 +37,27 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     this.login.loginWithGoogle()
-      .then(() => {
-        this.searchForUserProfile();
-      })
+      .then(() => this.searchDBForProfile())
       .catch((err) => {
         console.log('LoginComponent-->> Error with Google auth login.' + JSON.stringify(err, null, 3));
         this.isLoading = false;
       });
   }
 
-  searchForUserProfile() {
+  searchDBForProfile() {
     console.log('LoginComponent-->> Searching database for user.');
 
     return this.accountService.findUser(this.userProfile.email)
       .subscribe(
         (user: UserProfile) => {
+
           // Check if response object has an email property
-          if (user.email) {
-            console.log('LoginComponent-->> User located in database.');
+          if (user && user.email) {
             this.store.updateProfile(user);
             this.isLoading = false;
+            console.log('LoginComponent-->> User located in database.');
           }
+
           console.log('LoginComponent-->> User not found in database.');
           this.navigateToUserPage();
         }, (err) => {
