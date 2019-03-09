@@ -13,12 +13,13 @@ export class DataStoreService {
     this.profileSource.next(profile);
 
     // Updates profile in Local Storage
-    localStorage.setItem('cachedProfile', JSON.stringify(profile));
+    localStorage.removeItem('meal-vote-profile');
+    localStorage.setItem('meal-vote-profile', JSON.stringify(profile));
     console.log('DataStoreService--->> Successfully stored profile in Local Storage.');
   }
 
   getProfileFromLocalStorage(): UserProfile {
-    const profile = JSON.parse(localStorage.getItem('cachedProfile'));
+    const profile = JSON.parse(localStorage.getItem('meal-vote-profile'));
     return profile;
   }
 

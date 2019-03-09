@@ -11,9 +11,9 @@ export class AccountService {
 
     constructor(private http: HttpClient) { }
 
-    createUser(profile: UserProfile): Observable<UserProfile> {
+    createUser(profile: UserProfile): Observable<any> {
 
-        return this.http.post<UserProfile>(this.baseUrl, profile);
+        return this.http.post<any>(this.baseUrl, profile);
     }
 
     findUser(email: string): Observable<UserProfile> {

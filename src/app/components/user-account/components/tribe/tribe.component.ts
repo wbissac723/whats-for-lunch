@@ -54,17 +54,24 @@ export class TribeComponent implements OnInit {
 
     this.account.createUser(user)
       .subscribe(
-        (profile) => {
+        (response) => {
+
+          const profile = new UserProfile();
+          profile.email = response.user.email;
+          profile.userName = response.user.userName;
+          profile.tribe = response.user.tribe;
+
+           // Update the Profile in DataStore
+           this.store.updateProfile(profile);
+
+
+          // TODO determine if this is necessary
           this.tribeCreated = true;
-          this.tribeCreatedMessage = `You just created a tribe.`;
-          // Update the Profile in DataStore
-          this.store.updateProfile(profile);
-          // Update the profile in Local Storage
+          this.tribeCreatedMessage = `You just created the ${this.tribeName.value} tribe.`;
 
-          console.log('Successfully updated profile with new tribe.');
-          console.log(JSON.stringify(user, null, 3));
 
-          this.router.navigate(['/user/' + this.profile.userName]);
+          // Routes to user profile
+            this.router.navigate(['/user/' + this.profile.userName]);
         }, (err) => {
           this.tribeCreated = false;
           console.log('Failed to store user in database.' + JSON.stringify(err, null, 2));
