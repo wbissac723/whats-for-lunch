@@ -7,6 +7,8 @@ import { LocatorService } from 'src/app/components/services/locator-service/loca
 // Models
 import { Address, Restaurant } from 'src/app/components/models/restaurant.model';
 import { SearchParams } from 'src/app/components/services/locator-service/search-params/search-params.model';
+import { DataStoreService } from 'src/app/store/data-store.service';
+import { UserProfile } from '../../models/user-profile.model';
 
 @Component({
   selector: 'app-restaurant-locator',
@@ -19,11 +21,22 @@ export class RestaurantLocatorComponent implements OnInit {
   searchQuery: SearchParams = new SearchParams();
   restaurants: Restaurant[];
   searchSuccess: boolean;
+  profile: UserProfile;
 
   constructor(
     private locator: LocatorService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private store: DataStoreService
+  ) {
+    this.store.profile.subscribe((profile: UserProfile) => {
+      // Get profile from Local Storage when browser is refreshed
+      if (!profile) {
+        this.profile = store.getProfileFromLocalStorage();
+        console.log('TribeComponent---> Retrieved profile from local storage, userName: ' + this.profile.userName);
+      }
+      this.profile = profile;
+    });
+  }
 
   ngOnInit() {
     this.buildSearchForm();

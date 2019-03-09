@@ -1,11 +1,18 @@
 <section id="userHubSection">
 
+    <section class="user-welcome">
+        <h4> {{ profile?.userName | titlecase }},</h4>
+        <h5> What do you feel like eating today?</h5>
+      </section>
+
+      <img id="logo" src="../../../assets/logo.jpeg">
+
   <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
 
     <!-- location input field -->
     <div class="form-group">
       <div class="text-control">
-        <label for="locationInput">Where do you want to eat?</label>
+        <!-- <label for="locationInput">Where do you want to eat?</label> -->
         <input type="text" class="form-control" id="locationInput" placeholder="Enter location" formControlName="location">
       </div>
       <div class="text-control">
