@@ -27,8 +27,9 @@ export class TribeComponent implements OnInit {
   ) {
     this.store.profile.subscribe((profile: UserProfile) => {
       // Get profile from Local Storage when browser is refreshed
-      if (!profile.userName) {
+      if (!profile) {
         this.profile = store.getProfileFromLocalStorage();
+        console.log('TribeComponent---> Retrieved profile from local storage, userName: ' + this.profile.userName);
       }
       this.profile = profile;
     });

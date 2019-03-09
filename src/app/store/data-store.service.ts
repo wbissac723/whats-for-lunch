@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserProfile } from '../components/user-account/models/user-profile.model';
 import { BehaviorSubject } from 'rxjs';
-import { Profile } from 'selenium-webdriver/firefox';
 
 @Injectable({ providedIn: 'root' })
 export class DataStoreService {

@@ -41,27 +41,27 @@ export class LoginComponent implements OnInit {
         this.searchForUserProfile();
       })
       .catch((err) => {
-        console.log('Error with Google auth login.' + JSON.stringify(err, null, 3));
+        console.log('LoginComponent-->> Error with Google auth login.' + JSON.stringify(err, null, 3));
         this.isLoading = false;
       });
   }
 
   searchForUserProfile() {
-    console.log('Searching database for user.');
+    console.log('LoginComponent-->> Searching database for user.');
 
     return this.accountService.findUser(this.userProfile.email)
       .subscribe(
         (user: UserProfile) => {
           // Check if response object has an email property
           if (user.email) {
-            console.log('User located in database.');
+            console.log('LoginComponent-->> User located in database.');
             this.store.updateProfile(user);
             this.isLoading = false;
           }
-          console.log('User not found in database.');
+          console.log('LoginComponent-->> User not found in database.');
           this.navigateToUserPage();
         }, (err) => {
-          console.log('Error occurred searching for user in database: ' + JSON.stringify(err, null, 2));
+          console.log('LoginComponent-->> Error occurred searching for user in database: ' + JSON.stringify(err, null, 2));
           this.isLoading = false;
         });
   }
