@@ -9,13 +9,14 @@ import { Restaurant } from '../models/restaurant.model';
 })
 export class RestaurantComponent implements OnInit {
 
-  @Input() restaurants : Restaurant[]; 
-  currentRestaurant:any;
+  @Input() restaurants: Restaurant[];
+  currentRestaurant: any;
+
   constructor() { }
 
   ngOnInit() {}
 
-  extractRestaurantDetails(index){
+  extractRestaurantDetails(index) {
 
     this.currentRestaurant = this.restaurants[index];
   }
