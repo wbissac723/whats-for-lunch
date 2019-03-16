@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   searchDBForProfile() {
-    console.log('LoginComponent-->> Searching database for user.');
+    console.log('LoginComponent-->> Searching database for user email: ' + this.userProfile.email);
 
     return this.accountService.findUser(this.userProfile.email)
       .subscribe(

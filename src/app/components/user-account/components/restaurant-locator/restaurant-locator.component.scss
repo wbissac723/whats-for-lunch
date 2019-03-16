@@ -7,16 +7,12 @@
   margin-top: 20px;
 }
 
-.form-control {
-  width: 250px;
-}
 .text-control{
-  display: inline-block;
-  margin-right:20px;
+  width: 100%;
 }
 
 button {
-  width: 248px;
+  width: 100%;
 }
 
 .store-img {
@@ -39,4 +35,9 @@ label {
   height: 80px;
   width: 80px;
   margin: 10px auto 30px auto;
+}
+
+#categoryInput {
+
+  width: 100%;
 }

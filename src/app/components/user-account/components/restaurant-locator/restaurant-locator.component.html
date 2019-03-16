@@ -1,55 +1,61 @@
-<section id="userHubSection">
+<section class="text-center">
 
-    <section class="user-welcome">
-        <h4> {{ profile?.userName | titlecase }},</h4>
-        <h5> What do you feel like eating today?</h5>
-      </section>
 
-      <img id="logo" src="../../../assets/logo.jpeg">
 
-  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <section id="userHubSection">
 
-    <!-- location input field -->
-    <div class="form-group">
-      <div class="text-control">
-        <!-- <label for="locationInput">Where do you want to eat?</label> -->
-        <input type="text" class="form-control" id="locationInput" placeholder="Enter location" formControlName="location">
+      <section class="user-welcome">
+          <h4> {{ profile?.userName | titlecase }},</h4>
+          <h5> What do you feel like eating today?</h5>
+        </section>
+
+        <img id="logo" src="../../../assets/logo.jpeg">
+
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+
+      <!-- location input field -->
+      <div class="form-group">
+        <div class="text-control">
+          <!-- <label for="locationInput">Where do you want to eat?</label> -->
+          <input type="text" class="form-control" id="locationInput" placeholder="Which city & state" formControlName="location">
+        </div>
+        <!-- <div class="text-control">
+          <label for="zipcodeInput">
+            <input type="text" style="display:inline-block;" name="Area Zip code" id="zipcodeInput" class="form-control" placeholder="Enter Zipcode"
+              formControlName="zipCode">
+          </label>
+        </div> -->
       </div>
-      <div class="text-control">
-        <label for="zipcodeInput">
-          <input type="text" style="display:inline-block;" name="Area Zip code" id="zipcodeInput" class="form-control" placeholder="Enter Zipcode"
-            formControlName="zipCode">
-        </label>
+      <!-- food category options -->
+      <div class="form-group">
+        <label for="categoryInput"><strong>Select Category</strong></label>
+        <select class="form-control" formControlName="category" id="categoryInput">
+
+          <option value="barbecue">Barbecue</option>
+          <option value="deli">Deli</option>
+          <option value="indian">Indian</option>
+          <option value="italian">Italian</option>
+          <option value="mediterranean">Mediterranean</option>
+          <option value="mexican">Mexican</option>
+          <option value="pizza">Pizza</option>
+          <option value="soul food">Soul Food</option>
+
+        </select>
       </div>
-    </div>
-    <!-- food category options -->
-    <div class="form-group">
-      <label for="categoryInput">Select Category</label>
-      <select class="form-control" formControlName="category" id="categoryInput">
 
-        <option value="barbecue">Barbecue</option>
-        <option value="deli">Deli</option>
-        <option value="indian">Indian</option>
-        <option value="italian">Italian</option>
-        <option value="mediterranean">Mediterranean</option>
-        <option value="mexican">Mexican</option>
-        <option value="pizza">Pizza</option>
-        <option value="soul food">Soul Food</option>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Find something to eat</button>
+      </div>
 
-      </select>
-    </div>
-
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Find Food</button>
-    </div>
-
-  </form>
+    </form>
 
 
-</section>
+  </section>
 
-<section *ngIf="searchSuccess">
+  <section *ngIf="searchSuccess">
 
-  <app-restaurant [restaurants]=restaurants></app-restaurant>
+    <app-restaurant [restaurants]=restaurants></app-restaurant>
+
+  </section>
 
 </section>
