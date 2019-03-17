@@ -18,7 +18,7 @@ export class AccountService {
 
     findUser(email: string): Observable<UserProfile> {
 
-        return this.http.post<UserProfile>(`${this.baseUrl}/profile`, email);
+        return this.http.post<UserProfile>(`${this.baseUrl}/profile`, {email});
     }
 
     updateProfile(profile: UserProfile ): Observable<any> {

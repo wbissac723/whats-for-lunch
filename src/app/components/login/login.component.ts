@@ -1,10 +1,12 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
-
-import { LoginService } from './services/login.service';
+// Services
 import { AccountService } from '../services/account-service/account.service';
 import { DataStoreService } from 'src/app/store/data-store.service';
+import { LoginService } from './services/login.service';
+
+// Models
 import { UserProfile } from '../user-account/models/user-profile.model';
 
 

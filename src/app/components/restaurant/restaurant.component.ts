@@ -16,8 +16,7 @@ export class RestaurantComponent implements OnInit {
 
   ngOnInit() {}
 
-  extractRestaurantDetails(index) {
-
+  extractRestaurantDetails(index: number) {
     this.currentRestaurant = this.restaurants[index];
   }
 
