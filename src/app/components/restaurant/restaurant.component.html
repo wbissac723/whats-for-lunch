@@ -1,3 +1,5 @@
+
+<section *ngIf="!voted">
 <div class="card mx-auto" style="Width:85%;" *ngFor="let restaurant of restaurants;index as i">
   <div class="row">
     <div class="col-sm-6 col-md-4">
@@ -14,7 +16,7 @@
         <button type="button" class="btn btn-primary" (click)="extractRestaurantDetails(i)" data-toggle="modal" data-target="#commonModal">
           More Details
         </button>
-        <button type="button" class="ml-2 btn btn-danger" (click)="extractRestaurantDetails(i)" data-toggle="modal" data-target="#commonModal">
+        <button type="button" class="ml-2 btn btn-danger" (click)="vote(restaurant)" data-toggle="modal" data-target="#commonModal">
           Vote
         </button>
       </div>
@@ -65,3 +67,8 @@
     </ng-container>
   </app-modal>
 </div>
+</section>
+
+<section *ngIf="voted && chosenRestaurant">
+  You voted for <strong>{{ chosenRestaurant?.name}}</strong>
+</section>

@@ -6,8 +6,18 @@ import { BehaviorSubject } from 'rxjs';
 export class DataStoreService {
 
   // User profile observable
+  private votedSource = new BehaviorSubject<boolean>(false);
+  voted = this.votedSource.asObservable();
+
+
+
+  // User profile observable
   private profileSource = new BehaviorSubject<UserProfile>(null);
   profile = this.profileSource.asObservable();
+
+  castVote(answer: boolean) {
+    this.votedSource.next(answer);
+  }
 
   updateProfile(profile: UserProfile) {
     this.profileSource.next(profile);

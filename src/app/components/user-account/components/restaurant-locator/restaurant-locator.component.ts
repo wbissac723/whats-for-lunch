@@ -62,6 +62,8 @@ export class RestaurantLocatorComponent implements OnInit {
   }
 
   onSubmit() {
+    // Clear previous vote
+    this.store.castVote(false);
 
     this.searchQuery.location = this.location.value;
     this.searchQuery.zipcode = this.zipCode.value;
