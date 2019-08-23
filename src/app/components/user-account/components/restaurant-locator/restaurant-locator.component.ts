@@ -4,10 +4,11 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 // Services
 import { LocatorService } from 'src/app/components/services/locator-service/locator.service';
 
+import { take } from 'rxjs/operators';
 // Models
-import { Address, Restaurant } from 'src/app/components/models/restaurant.model';
+import { Address, Restaurant } from 'src/app/models/restaurant.model';
 import { SearchParams } from 'src/app/components/services/locator-service/search-params/search-params.model';
-import { DataStoreService } from 'src/app/store/data-store.service';
+import { DataStoreService } from 'src/app/shared/store/data-store.service';
 import { UserProfile } from '../../models/user-profile.model';
 
 @Component({
@@ -28,7 +29,9 @@ export class RestaurantLocatorComponent implements OnInit {
     private fb: FormBuilder,
     private store: DataStoreService
   ) {
-    this.store.profile.subscribe((profile: UserProfile) => {
+    this.store.profile
+    .pipe(take(1))
+    .subscribe((profile: UserProfile) => {
       // Get profile from Local Storage when browser is refreshed
       if (!profile) {
         this.profile = store.getProfileFromLocalStorage();
@@ -70,6 +73,7 @@ export class RestaurantLocatorComponent implements OnInit {
     this.searchQuery.category = this.category.value;
 
     this.locator.getRestaurants(this.searchQuery)
+      .pipe(take(1))
       .subscribe(
         (response) => {
           this.restaurants = this.createListOfRestaurants(response);

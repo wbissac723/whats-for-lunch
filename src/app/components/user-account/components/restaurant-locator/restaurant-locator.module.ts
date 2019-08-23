@@ -7,7 +7,6 @@ import { RestaurantLocatorComponent } from './restaurant-locator.component';
 
 import { RestaurantModule } from '../../../restaurant/restaurant.module';
 
-import { FoodLocatorInterceptor } from 'src/app/interceptors/food-locator.interceptor';
 
 @NgModule({
   declarations: [RestaurantLocatorComponent],
@@ -17,8 +16,6 @@ import { FoodLocatorInterceptor } from 'src/app/interceptors/food-locator.interc
     ReactiveFormsModule,
     RestaurantModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: FoodLocatorInterceptor, multi: true }
-  ]
+  providers: []
 })
 export class RestaurantLocatorModule { }

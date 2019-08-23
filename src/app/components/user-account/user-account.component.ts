@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataStoreService } from 'src/app/store/data-store.service';
+import { DataStoreService } from 'src/app/shared/store/data-store.service';
 import { UserProfile } from './models/user-profile.model';
 @Component({
   selector: 'app-user-account',

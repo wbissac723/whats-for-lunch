@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 
-import { DataStoreService } from 'src/app/store/data-store.service';
+import { DataStoreService } from 'src/app/shared/store/data-store.service';
 import { UserProfile } from '../../user-account/models/user-profile.model';
 
 @Injectable({providedIn: 'root'})

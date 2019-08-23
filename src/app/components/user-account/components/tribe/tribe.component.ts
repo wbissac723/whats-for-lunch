@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { DataStoreService } from 'src/app/store/data-store.service';
+import { DataStoreService } from 'src/app/shared/store/data-store.service';
 import { AccountService } from 'src/app/components/services/account-service/account.service';
 import { Router } from '@angular/router';
 import { UserProfile, Tribe } from '../../models/user-profile.model';

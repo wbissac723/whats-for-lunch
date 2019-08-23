@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 // Services
 import { AccountService } from '../services/account-service/account.service';
-import { DataStoreService } from 'src/app/store/data-store.service';
+import { DataStoreService } from 'src/app/shared/store/data-store.service';
 import { LoginService } from './services/login.service';
 
 // Models
